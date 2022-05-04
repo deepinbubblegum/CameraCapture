@@ -5,7 +5,7 @@ from queue import Queue
 import time
 
 class CaptureRTSP:
-    def __init__(self, uri, username=None, password=None, queueSize=256):
+    def __init__(self, uri, username=None, password=None, queueSize=1024):
         self.cap = self.ConnectUri(uri)
         f_width = int(self.cap.get(3))
         f_height = int(self.cap.get(4))
@@ -20,11 +20,15 @@ class CaptureRTSP:
         print(f_width, f_height, f_fps, queueSize)
 
     def ConnectUri(self, uri):
-        rtsp_gst = f'rtspsrc location={uri} ! autovideosink'
-        print(rtsp_gst)
+        # rtsp_gst = f'rtspsrc location={uri} latency=0 ! queue ! rtph264depay ! decodebin ! videoconvert ! appsink sync=true'
+        # cap = cv2.VideoCapture(
+        #     rtsp_gst, 
+        #     cv2.CAP_GSTREAMER
+        # )
+        os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"]="hw_decoders_any;cuda"
         cap = cv2.VideoCapture(
-            rtsp_gst, 
-            cv2.CAP_GSTREAMER
+            uri, 
+            cv2.CAP_FFMPEG
         )
         # cap = cv2.VideoCapture(uri)
         return cap
@@ -42,7 +46,7 @@ class CaptureRTSP:
         return self.queue_frame.get()
 
     def ret(self):
-        return self.queue_frame.qsize() > 0
+        return self.queue_frame.qsize() > 5
 
     def stop(self):
         self.stopped = True
@@ -50,6 +54,6 @@ class CaptureRTSP:
     def start(self):
         # start a thread to read frames from the file video stream
         t = Thread(target=self.CaptureFrame, args=())
-        t.daemon = True
+        t.daemon = False
         t.start()
         return self
