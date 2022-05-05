@@ -1,9 +1,12 @@
 import os
 import cv2
+import numpy as np
+os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"]="rtsp_transport;udp;hw_decoders_any;vaapi,vdpau"
+os.environ["OPENCV_FFMPEG_WRITER_OPTIONS"]="hw_encoders_any;cuda"
 from threading import Thread
 from queue import Queue
 import time
-
+print(cv2.getBuildInformation())
 class CaptureRTSP:
     def __init__(self, uri, username=None, password=None, queueSize=1024):
         self.cap = self.ConnectUri(uri)
@@ -20,17 +23,10 @@ class CaptureRTSP:
         print(f_width, f_height, f_fps, queueSize)
 
     def ConnectUri(self, uri):
-        # rtsp_gst = f'rtspsrc location={uri} latency=0 ! queue ! rtph264depay ! decodebin ! videoconvert ! appsink sync=true'
-        # cap = cv2.VideoCapture(
-        #     rtsp_gst, 
-        #     cv2.CAP_GSTREAMER
-        # )
-        os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"]="hw_decoders_any;cuda"
         cap = cv2.VideoCapture(
             uri, 
             cv2.CAP_FFMPEG
         )
-        # cap = cv2.VideoCapture(uri)
         return cap
 
     def CaptureFrame(self):
@@ -38,6 +34,7 @@ class CaptureRTSP:
             if self.stopped:
                 return
             ret, frame = self.cap.read()
+            # _, frame = cv2.imencode('.jpg', frame)
             if ret is False:
                 self.stop()
             self.queue_frame.put(frame)
@@ -46,7 +43,17 @@ class CaptureRTSP:
         return self.queue_frame.get()
 
     def ret(self):
-        return self.queue_frame.qsize() > 5
+        print(self.queue_frame.qsize())
+        return self.queue_frame.qsize() > 0
+    
+    def write(self, file_name='temp', frame=None, type='mjpeg'):
+        if type == 'mjpeg':
+            _, jpg = cv2.imencode('.jpg', frame)
+            data_encode = np.array(jpg)
+            image_jpeg = (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + data_encode.tobytes() + b'\r\n')
+            # print(type(image_jpeg))
+            with open(f'{file_name}.mjpeg', 'ab') as file:
+                file.write(image_jpeg)
 
     def stop(self):
         self.stopped = True
