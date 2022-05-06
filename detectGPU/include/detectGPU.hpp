@@ -1,9 +1,14 @@
-#include <stdio.h>
+#include <iostream>
+#include <opencv2/core.hpp>
+#include <opencv2/cudaarithm.hpp>
+
+using namespace std;
+using namespace cv;
+using namespace cv::cuda;
 class detectGPU
 {
     private:
-        int increaseNum;
+        bool hasDevices = false;
     public:
-        int plus(int a, int b);
-        int increase(int a);
+        bool checkDeviceInfo();
 };

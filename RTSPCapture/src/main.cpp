@@ -2,8 +2,7 @@
 #include <detectGPU.hpp>
 
 int main(void) {
-    detectGPU objCal; //สร้าง Object ของ Class cal
-    std::cout << "Hello, world!" << std::endl;
-    std::cout << "Call class" << objCal.plus(1,2) << std::endl;
+    detectGPU detect_gpu;
+    std::cout << "Call class" << detect_gpu.checkDeviceInfo() << std::endl;
     return (0);
 }

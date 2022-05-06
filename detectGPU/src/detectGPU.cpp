@@ -1,10 +1,15 @@
 #include <detectGPU.hpp>
 
-int detectGPU::plus(int a, int b){
-    return a+b;
-}
-
-int detectGPU::increase(int a){
-    increaseNum = 1;
-    return(a+increaseNum);
+bool detectGPU::checkDeviceInfo(){
+    printShortCudaDeviceInfo(getDevice());
+    int cuda_devices_number = getCudaEnabledDeviceCount();
+    cout << "CUDA Device(s) Number: "<< cuda_devices_number << endl;
+    DeviceInfo _deviceInfo;
+    bool _isd_evice_compatible = _deviceInfo.isCompatible();
+    cout << "CUDA Device(s) Compatible: " << _isd_evice_compatible << endl;
+    if (cuda_devices_number > 0 && _isd_evice_compatible)
+        hasDevices = true;
+    else
+        hasDevices = false;
+    return hasDevices;
 }
