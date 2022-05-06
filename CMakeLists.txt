@@ -4,7 +4,7 @@ project(RTSP_Capture VERSION 0.1.0)
 include(CTest)
 enable_testing()
 
-add_subdirectory(Capture)
+add_subdirectory(RTSPCapture)
 add_subdirectory(detectGPU)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
