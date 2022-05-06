@@ -1,4 +1,4 @@
-#include <detectGPU.h>
+#include <detectGPU.hpp>
 
 int detectGPU::plus(int a, int b){
     return a+b;

@@ -1,8 +1,9 @@
 #include <iostream>
-#include <detectGPU>
+#include <detectGPU.hpp>
 
-int main(int, char**) {
-    cal objCal; //สร้าง Object ของ Class cal
-    std::cout << "Hello, world!\n";
+int main(void) {
+    detectGPU objCal; //สร้าง Object ของ Class cal
+    std::cout << "Hello, world!" << std::endl;
+    std::cout << "Call class" << objCal.plus(1,2) << std::endl;
     return (0);
 }
