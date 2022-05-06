@@ -9,6 +9,8 @@ add_executable(RTSPCapture
 )
 target_link_libraries(RTSPCapture detectGPU)
 
+
+
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
