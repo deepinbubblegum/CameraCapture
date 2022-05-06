@@ -7,7 +7,9 @@ enable_testing()
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-add_executable(RTSP_Capture main.cpp)
+add_executable(RTSP_Capture 
+    src/main.cpp
+)
 
 target_link_libraries(RTSP_Capture ${OpenCV_LIBS})
 
