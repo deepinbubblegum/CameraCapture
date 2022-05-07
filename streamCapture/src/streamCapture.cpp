@@ -17,8 +17,8 @@ int streamCapture::run(){
     width = cap.get(3);
     height = cap.get(4);
     fps = cap.get(5);
-    cout << "Width : " << width << endl;
-    cout << "Height: " << height << endl;
+    cout << "Width : " << width << ", ";
+    cout << "Height: " << height << ", ";
     cout << "fps: " << fps << endl;
 
     int w = (int)(width / resize_factor);
