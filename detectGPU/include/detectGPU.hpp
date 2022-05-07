@@ -9,6 +9,7 @@ class detectGPU
 {
     private:
         bool hasDevices = false;
+        bool showDetect = true;
     public:
         bool checkDeviceInfo();
 };
