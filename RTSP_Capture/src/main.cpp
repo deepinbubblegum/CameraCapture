@@ -1,5 +1,7 @@
 #include <iostream>
 
-int main(int, char**) {
-    std::cout << "Hello, world!\n";
+using namespace std;
+int main() {
+    cout << "RTSP Capture!\n";
+    return 0;
 }
