@@ -1,5 +1,5 @@
 #include <iostream>
-#include <capture.hpp>
+#include <streamCapture.hpp>
 
 using namespace std;
 int main() {
