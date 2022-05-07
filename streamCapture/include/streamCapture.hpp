@@ -9,6 +9,9 @@ private:
     cv::Mat frame;
     string rtsp_uri = "rtspsrc location=rtsp://admin:Camera123@192.168.100.2:554/rtpstream/config1 latency=0 ! decodebin ! videoconvert ! queue ! appsink sync=true";
     int resize_factor = 2;
+    bool stop = false;
+    int capframe();
+    
 public:
     double width, height;
     double fps;

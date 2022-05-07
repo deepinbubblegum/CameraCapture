@@ -1,5 +1,11 @@
 #include <streamCapture.hpp>
 
+int streamCapture::capframe(){
+    //thread
+    return 0;
+}
+
+
 int streamCapture::run(){
     cv::VideoCapture cap(rtsp_uri, cv::CAP_GSTREAMER);
     if(!cap.isOpened()) {
