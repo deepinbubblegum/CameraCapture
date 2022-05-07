@@ -1,11 +1,5 @@
 #include <streamCapture.hpp>
 
-int streamCapture::capframe(){
-    //thread
-    return 0;
-}
-
-
 int streamCapture::run(){
     cv::VideoCapture cap(rtsp_uri, cv::CAP_GSTREAMER);
     if(!cap.isOpened()) {
@@ -34,8 +28,11 @@ int streamCapture::run(){
         if (cv::waitKey(1) == 27) {
             break;
         }
+        if (cv::getWindowProperty("RTSP stream", cv::WND_PROP_VISIBLE) < 1)
+            break;
     }
     cap.release();
     cv::destroyAllWindows();
+    cout << "RTSP stream CLOSED" << endl;
     return 0;
 }
