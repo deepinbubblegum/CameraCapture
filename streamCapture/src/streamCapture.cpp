@@ -1,14 +1,6 @@
 #include <streamCapture.hpp>
 
 int streamCapture::run(){
-    // #if WIN32
-    //     _putenv_s("OPENCV_FFMPEG_CAPTURE_OPTIONS", "rtsp_transport;udp;hw_decoders_any;vaapi,vdpau");
-    //     _putenv_s("OPENCV_FFMPEG_WRITER_OPTIONS", "hw_encoders_any;cuda");
-    // #else
-    //     setenv("OPENCV_FFMPEG_CAPTURE_OPTIONS", "rtsp_transport;udp;hw_decoders_any;vaapi,vdpau", 1);
-    //     setenv("OPENCV_FFMPEG_WRITER_OPTIONS", "hw_encoders_any;cuda", 1);
-    // #endif
-    // cv::VideoCapture cap(rtsp_uri, cv::CAP_FFMPEG);
     cv::VideoCapture cap(rtsp_uri, cv::CAP_GSTREAMER);
     if(!cap.isOpened()) {
         std::cout << "Cannot open RTSP stream" << std::endl;
@@ -17,6 +9,9 @@ int streamCapture::run(){
     width = cap.get(3);
     height = cap.get(4);
     fps = cap.get(5);
+    if (width == 0 && height==0)
+        return -1;
+
     cout << "Width : " << width << ", ";
     cout << "Height: " << height << ", ";
     cout << "fps: " << fps << endl;
