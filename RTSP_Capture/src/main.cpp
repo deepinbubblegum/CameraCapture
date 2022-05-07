@@ -9,7 +9,7 @@ int main() {
     streamCapture stream;
     stream.run();
     cout << "RTSP Capture stop!\n";
-    system("pause"); //windows
+    // system("pause"); //windows Press any key to continue . . .
     // system("read"); // Linux and Mac 
     return 0;
 }
