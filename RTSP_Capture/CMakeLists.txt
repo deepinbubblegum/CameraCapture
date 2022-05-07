@@ -1,11 +1,29 @@
+################################################################################
+### Selecting CMake minimum version
+
 cmake_minimum_required(VERSION 3.0.0)
-project(RTSP_Capture VERSION 0.1.0)
 
-include(CTest)
-enable_testing()
+################################################################################
+### Setting Global Parameters
 
-add_executable(RTSP_Capture main.cpp)
+set(PROJECT_NAME "RTSP Capture")
+set(BINARY_NAME "RTSP_Capture")
 
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
+set(APP_VERSION_STRING 0.1.0)
+set(APP_BASE_PATH "${PROJECT_SOURCE_DIR}/src")
+
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+FIND_PACKAGE(Threads REQUIRED)
+
+project(${PROJECT_NAME})
+################################################################################
+### Check Dependencies
+
+INCLUDE(CheckIncludeFile)
+
+################################################################################
+### Project definition
+
+add_executable(${BINARY_NAME} src/main.cpp)
+
+install(TARGETS ${BINARY_NAME} DESTINATION bin)
