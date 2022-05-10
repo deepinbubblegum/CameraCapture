@@ -5,7 +5,8 @@ string streamCapture::genFile_name(){
     struct tm* now = localtime(&t);
     char buffer[80];
     strftime(buffer, 80, "%F_%H-%M-%S", now);
-    string a_name = (string)buffer + "." + file_type;
+    string a_name = NAME_DIR + "/" + (string)buffer + "." + file_type;
+    path_file_video.push_back(a_name);
     return a_name;
 }
 
@@ -27,11 +28,9 @@ void streamCapture::capture(){
     cout << "fps: " << fps << endl;
     size = cv::Size((int)width, (int)height);
     int count_frame = 0;
-    string file_name = "videos";
-    createDirectory(file_name);;
+    createDirectory(NAME_DIR);;
     while(true){
-        file_name = "videos/" + (string)genFile_name();
-        outputVideo.open(file_name, fourcc, fps, size);
+        outputVideo.open(genFile_name(), fourcc, fps, size);
         while(true){
             cap >> frame;
             frameSeq.push_back(frame);

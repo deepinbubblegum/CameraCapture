@@ -19,8 +19,8 @@ private:
     string file_type = "avi";
     cv::VideoWriter outputVideo;
     cv::Size size;
-
-    string NAME_DIR;
+    vector<string> path_file_video;
+    string NAME_DIR = "videos";
 
     string rtsp_uri = "";
     int resize_factor = 2;
