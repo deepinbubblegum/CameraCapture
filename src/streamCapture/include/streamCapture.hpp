@@ -20,7 +20,8 @@ private:
     cv::VideoWriter outputVideo;
     cv::Size size;
     vector<string> path_file_video;
-    string NAME_DIR = "videos";
+    string VIDEO_DIR = "videos";
+    string NAME_DIR = "";
 
     string rtsp_uri = "";
     int resize_factor = 2;
@@ -29,6 +30,7 @@ private:
     double fps;
     
     string genFile_name();
+    string getDir_Video();
 
 public:
     bool setStart(string url, double video_sec);

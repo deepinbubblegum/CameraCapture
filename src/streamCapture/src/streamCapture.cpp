@@ -5,12 +5,21 @@ string streamCapture::genFile_name(){
     struct tm* now = localtime(&t);
     char buffer[80];
     strftime(buffer, 80, "%F_%H-%M-%S", now);
-    string a_name = NAME_DIR + "/" + (string)buffer + "." + file_type;
+    string a_name = VIDEO_DIR + "/" + NAME_DIR + "/" + (string)buffer + "." + file_type;
     path_file_video.push_back(a_name);
     return a_name;
 }
 
+string streamCapture::getDir_Video(){
+    time_t t = time(0);
+    struct tm* now = localtime(&t);
+    char buffer[80];
+    strftime(buffer, 80, "%F", now);
+    return (string)buffer;
+}
+
 void streamCapture::capture(){
+    NAME_DIR = getDir_Video();
     cv::VideoCapture cap(rtsp_uri, cv::CAP_GSTREAMER);
     if (!cap.isOpened()){
         exit(0);
@@ -28,7 +37,9 @@ void streamCapture::capture(){
     cout << "fps: " << fps << endl;
     size = cv::Size((int)width, (int)height);
     int count_frame = 0;
-    createDirectory(NAME_DIR);;
+    createDirectory(VIDEO_DIR);
+    string dir_video_stame = VIDEO_DIR + "/" + NAME_DIR;
+    createDirectory(dir_video_stame);
     while(true){
         outputVideo.open(genFile_name(), fourcc, fps, size);
         while(true){
