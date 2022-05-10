@@ -3,6 +3,6 @@ project(streamCapture)
 
 find_package( OpenCV REQUIRED )
 include_directories(${OpenCV_INCLUDE_DIRS})
-add_library(streamCapture SHARED src/streamCapture.cpp)
+add_library(streamCapture STATIC src/streamCapture.cpp)
 target_include_directories(streamCapture PUBLIC include)
 target_link_libraries(streamCapture ${OpenCV_LIBS})
