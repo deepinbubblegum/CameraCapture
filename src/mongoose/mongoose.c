@@ -15,7 +15,7 @@
 // Alternatively, you can license this software under a commercial
 // license, as set out in https://www.mongoose.ws/licensing/
 
-#include "include/mongoose.h"
+#include "mongoose.h"
 
 #ifdef MG_ENABLE_LINES
 #line 1 "src/base64.c"
