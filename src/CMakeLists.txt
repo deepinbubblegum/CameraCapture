@@ -1,2 +1,3 @@
+add_subdirectory(PiCapture)
 add_subdirectory(streamCapture)
 add_subdirectory(extractVideo)
