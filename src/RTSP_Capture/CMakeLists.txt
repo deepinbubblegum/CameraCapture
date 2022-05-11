@@ -1,3 +1,4 @@
 add_executable(RTSP_Capture main.cpp)
 target_link_libraries(RTSP_Capture detectGPU)
 target_link_libraries(RTSP_Capture streamCapture)
+target_link_libraries(RTSP_Capture extractVideo)
