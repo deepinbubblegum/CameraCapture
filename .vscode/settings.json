@@ -73,6 +73,8 @@
         "xmemory": "cpp",
         "xstddef": "cpp",
         "xtr1common": "cpp",
-        "future": "cpp"
+        "future": "cpp",
+        "condition_variable": "cpp",
+        "regex": "cpp"
     }
 }

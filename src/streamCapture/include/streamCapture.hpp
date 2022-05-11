@@ -25,18 +25,23 @@ private:
 
     string rtsp_uri = "";
     int resize_factor = 2;
-    bool stop = false;
+
     double width, height;
     double fps;
     
     string genFile_name();
     string getDir_Video();
-
-public:
-    bool setStart(string url, double video_sec);
-    // int test();
-    bool setStop();
     void capture();
+    thread task_;
+    atomic<bool> isRunning_;
+public:
+    ~streamCapture() {
+         this->setStopCapture();
+    } 
+    bool setParamsCapture(string url, double video_sec);
+    // int test();
+    bool setStopCapture();
+    bool setStartCapture();
     vector<string> getPathFileVideo();
     // bool start(string url, double range_sec);
 };

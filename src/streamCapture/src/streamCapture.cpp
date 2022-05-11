@@ -19,6 +19,7 @@ string streamCapture::getDir_Video(){
 }
 
 void streamCapture::capture(){
+    this->isRunning_ = true;
     NAME_DIR = getDir_Video();
     cv::VideoCapture cap(rtsp_uri, cv::CAP_GSTREAMER);
     if (!cap.isOpened()){
@@ -50,7 +51,7 @@ void streamCapture::capture(){
             if (count_frame >= (video_range * fps)) break;
         }
         count_frame = 0;
-        if (stop){
+        if (!this->isRunning_){
             outputVideo.release();
             break;
         }
@@ -58,14 +59,15 @@ void streamCapture::capture(){
     cap.release();
 }
 
-bool streamCapture::setStart(string url, double video_sec){
+bool streamCapture::setParamsCapture(string url, double video_sec){
     video_range = video_sec;
     rtsp_uri = url;
     return true;
 }
 
-bool streamCapture::setStop(){
-    stop = true;
+bool streamCapture::setStopCapture(){
+    this->isRunning_ = false;
+    task_.join();
     return true;
 }
 
@@ -74,6 +76,12 @@ vector<string> streamCapture::getPathFileVideo(){
         cout << path_file_video[i] << endl;
     }
     return path_file_video;
+}
+
+bool streamCapture::setStartCapture(){
+    this->task_ = std::thread(&streamCapture::capture, this);
+    cout << "capture thread start.\n";
+    return true;
 }
 
 // bool streamCapture::start(string url, double video_sec){
