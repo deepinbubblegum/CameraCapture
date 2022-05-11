@@ -5,7 +5,6 @@
 #include <extractVideo.hpp>
 
 using namespace std;
-
 void startCapture(streamCapture stream){
     stream.capture();
 }
