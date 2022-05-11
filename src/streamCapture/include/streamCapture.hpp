@@ -33,7 +33,7 @@ private:
     string getDir_Video();
     void capture();
     thread task_;
-    atomic<bool> isRunning_;
+    bool isRunning_;
 public:
     ~streamCapture() {
          this->setStopCapture();
