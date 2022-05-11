@@ -1,11 +1,10 @@
 #include <extractVideo.hpp>
 
 // 182618, 182749
-
 bool extractVideo::find_time_in_video(){
-    
-
-    
+    for(int i; i < source_dir.size(); i++){
+        cout << source_dir[i] << endl;
+    }
     return true;
 }
 

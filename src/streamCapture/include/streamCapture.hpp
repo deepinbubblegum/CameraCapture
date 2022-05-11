@@ -37,5 +37,6 @@ public:
     // int test();
     bool setStop();
     void capture();
+    vector<string> getPathFileVideo();
     // bool start(string url, double range_sec);
 };

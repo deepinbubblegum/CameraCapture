@@ -2,11 +2,16 @@
 #include <detectGPU.hpp>
 #include <streamCapture.hpp>
 #include <thread>
+#include <extractVideo.hpp>
 
 using namespace std;
 
 void startCapture(streamCapture stream){
     stream.capture();
+}
+
+void startExtractVideo(){
+    // code ..
 }
 
 int main() {
@@ -15,8 +20,14 @@ int main() {
     streamCapture stream;
     string rtsp_uri = "rtspsrc location=rtsp://admin:Camera123@192.168.100.2:554/rtpstream/config1 latency=0 ! decodebin ! videoconvert ! queue ! appsink sync=true";
     stream.setStart(rtsp_uri, 10);
+
+
     thread setCapthread(startCapture, stream);
+
     setCapthread.join();
+
+
+
     // cout << "RTSP Capture Start!\n";
     // system("pause"); //windows Press any key to continue . . .
     // system("read"); // Linux and Mac 

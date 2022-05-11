@@ -69,6 +69,10 @@ bool streamCapture::setStop(){
     return true;
 }
 
+vector<string> streamCapture::getPathFileVideo(){
+    return path_file_video;
+}
+
 // bool streamCapture::start(string url, double video_sec){
 //     video_range = video_sec;
 //     rtsp_uri = url;
