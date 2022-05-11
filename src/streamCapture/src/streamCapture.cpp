@@ -70,6 +70,9 @@ bool streamCapture::setStop(){
 }
 
 vector<string> streamCapture::getPathFileVideo(){
+    for(int i = 0; i < path_file_video.size(); i++){
+        cout << path_file_video[i] << endl;
+    }
     return path_file_video;
 }
 
