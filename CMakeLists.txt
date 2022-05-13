@@ -7,22 +7,3 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 
 add_subdirectory(src)
-
-
-
-
-# #Custom target for Only Building
-# add_custom_target(build ALL)
-
-# #Custom target for build and debug with GDB
-# add_custom_target(build_and_debug ALL DEPENDS ${TARGET_BINARY})
-
-# #Board IP
-# set(BOARD_IP 10.1.10.190)
-
-# #Port no
-# set(PORT_NO 2345)
-
-# add_custom_command(TARGET build_and_debug POST_BUILD
-# COMMAND scp ${CMAKE_CURRENT_BINARY_DIR}/${TARGET_BINARY} pi@${BOARD_IP}:/home/pi/CameraCapture
-# COMMAND ssh -f -L${PORT_NO}:localhost:${PORT_NO} pi@${BOARD_IP} 'gdbserver :${PORT_NO} ./${TARGET_BINARY}')
