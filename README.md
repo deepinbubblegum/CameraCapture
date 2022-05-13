@@ -1,1 +1,20 @@
-sudo apt-get install --reinstall libstdc++6
+cmake -D BUILD_TIFF=ON \
+    -D WITH_CUDA=OFF \
+    -D ENABLE_AVX=OFF \
+    -D WITH_OPENGL=OFF \
+    -D WITH_OPENCL=OFF \
+    -D WITH_IPP=OFF \
+    -D WITH_TBB=ON \
+    -D BUILD_TBB=ON \
+    -D WITH_EIGEN=OFF \
+    -D WITH_V4L=OFF \
+    -D WITH_VTK=OFF \
+    -D BUILD_TESTS=OFF \
+    -D BUILD_PERF_TESTS=OFF \
+    -D CMAKE_BUILD_TYPE=RELEASE \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D CMAKE_TOOLCHAIN_FILE=../platforms/linux/arm-gnueabi.toolchain.cmake \
+    -D OPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib/modules /opt/opencv/ \
+    -D OPENCV_ENABLE_NONFREE=ON \
+    -D ENABLE_NEON=ON \
+    -D ENABLE_VFPV3=ON \
