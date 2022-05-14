@@ -22,23 +22,32 @@ private:
     vector<string> path_file_video;
     string VIDEO_DIR = "videos";
     string NAME_DIR = "";
-
     string rtsp_uri = "";
-    int resize_factor = 2;
+    int inx_cam;
 
+    int resize_factor = 2;
+    
     double width, height;
     double fps;
+
+    cv::VideoCapture video_cap;
     
     string genFile_name();
     string getDir_Video();
     void capture();
     thread task_;
     bool isRunning_;
+
+    string gstreamer_pipeline(int capture_width, int capture_height, int framerate, int display_width, int display_height);
+    cv::VideoCapture cap_RTSP();
+    cv::VideoCapture cap_pi(string pipe);
+    
 public:
     ~streamCapture() {
          this->setStopCapture();
     } 
     bool setParamsCapture(string url, double video_sec);
+    bool setParamsCapture(int capture_width, int capture_height, int framerate, int display_width, int display_height);
     // int test();
     bool setStopCapture();
     bool setStartCapture();
