@@ -37,7 +37,7 @@ bool streamCapture::setParamsCapture(int capture_width, int capture_height, int 
 
 string streamCapture::gstreamer_pipeline(int capture_width, int capture_height, int framerate, int display_width, int display_height) {
     return
-            " libcamerasrc ! video/x-raw, "
+            " v4l2src device=/dev/video0 ! video/x-raw, "
             " width=(int)" + std::to_string(capture_width) + ","
             " height=(int)" + std::to_string(capture_height) + ","
             " framerate=(fraction)" + std::to_string(framerate) +"/1 !"
