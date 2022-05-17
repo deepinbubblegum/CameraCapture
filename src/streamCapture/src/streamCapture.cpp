@@ -31,6 +31,7 @@ bool streamCapture::setParamsCapture(string url, double video_sec)
 bool streamCapture::setParamsCapture(int capture_width, int capture_height, int framerate, int display_width, int display_height)
 {
     string pi_pipe = gstreamer_pipeline(capture_width, capture_height, framerate, display_width, display_height);
+    fps = framerate;
     video_cap = cap_pi(pi_pipe);
     return true;
 }
