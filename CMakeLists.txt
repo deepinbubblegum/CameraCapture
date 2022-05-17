@@ -3,7 +3,7 @@ project(CameraCapture)
 
 # set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON) # microsoft fucking fix windows visual studio community build missing *.lib and stupid 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/lib")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 
 # use, i.e. don't skip the full RPATH for the build tree

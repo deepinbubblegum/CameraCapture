@@ -7,11 +7,12 @@ using namespace std;
 int main(){
     streamCapture stream;
     cout << "################# CameraCapture Pi version #################" << endl;
-    int capture_width = 640; //1280 ;
-    int capture_height = 480; //720 ;
-    int framerate = 15 ;
-    int display_width = 640; //1280 ;
-    int display_height = 480; //720 ;
+    int capture_width = 1280; //1280 ;
+    int capture_height = 1080; //720 ;
+    int framerate = 10;
+    int display_width = 1280; //640 ;
+    int display_height = 1080; //360 ;
+
     stream.setParamsCapture(capture_width, capture_height, framerate, display_width, display_height);
     stream.setStartCapture();
 

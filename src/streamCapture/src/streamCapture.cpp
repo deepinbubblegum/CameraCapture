@@ -20,13 +20,13 @@ string streamCapture::getDir_Video()
     return (string)buffer;
 }
 
-bool streamCapture::setParamsCapture(string url, double video_sec)
-{
-    video_range = video_sec;
-    rtsp_uri = url;
-    video_cap = cap_RTSP();
-    return true;
-}
+// bool streamCapture::setParamsCapture(string url, double video_sec)
+// {
+//     video_range = video_sec;
+//     rtsp_uri = url;
+//     video_cap = cap_RTSP();
+//     return true;
+// }
 
 bool streamCapture::setParamsCapture(int capture_width, int capture_height, int framerate, int display_width, int display_height)
 {
@@ -37,7 +37,7 @@ bool streamCapture::setParamsCapture(int capture_width, int capture_height, int 
 
 string streamCapture::gstreamer_pipeline(int capture_width, int capture_height, int framerate, int display_width, int display_height) {
     return
-            " v4l2src device=/dev/video0 ! video/x-raw, "
+            " libcamerasrc video/x-raw, "
             " width=(int)" + std::to_string(capture_width) + ","
             " height=(int)" + std::to_string(capture_height) + ","
             " framerate=(fraction)" + std::to_string(framerate) +"/1 !"
