@@ -46,7 +46,7 @@ public:
     ~streamCapture() {
          this->setStopCapture();
     } 
-    // bool setParamsCapture(string url, double video_sec);
+    bool setParamsCapture(string url, double video_sec);
     bool setParamsCapture(int capture_width, int capture_height, int framerate, int display_width, int display_height);
     // int test();
     bool setStopCapture();
