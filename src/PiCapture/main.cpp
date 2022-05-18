@@ -18,7 +18,7 @@ int main(){
 
     while(true){
         vector<string> file_list = stream.getPathFileVideo();
-        cout << "#################" << endl;
+        // cout << "#################" << endl;
         for(string str : file_list)
             cout << str << endl;
         this_thread::sleep_for(10000ms);

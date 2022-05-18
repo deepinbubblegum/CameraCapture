@@ -29,6 +29,8 @@ private:
     
     double width, height;
     double fps;
+    double fps_now = 0.0, fps_min = 0.0, fps_max=0.0, fps_sum=0.0, fps_avg=0.0;
+    int count_fps;
 
     cv::VideoCapture video_cap;
     

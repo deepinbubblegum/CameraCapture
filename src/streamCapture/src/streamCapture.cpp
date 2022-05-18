@@ -31,6 +31,8 @@ bool streamCapture::setParamsCapture(string url, double video_sec)
 bool streamCapture::setParamsCapture(int capture_width, int capture_height, int framerate, int display_width, int display_height)
 {
     string pi_pipe = gstreamer_pipeline(capture_width, capture_height, framerate, display_width, display_height);
+    width = capture_width;
+    height = capture_height;
     fps = framerate;
     video_cap = cap_pi(pi_pipe);
     return true;
@@ -38,14 +40,12 @@ bool streamCapture::setParamsCapture(int capture_width, int capture_height, int 
 
 string streamCapture::gstreamer_pipeline(int capture_width, int capture_height, int framerate, int display_width, int display_height) {
     return
-            " libcamerasrc ! video/x-raw, "
+            " libcamerasrc ! video/x-raw,format=NV12,"
             " width=(int)" + std::to_string(capture_width) + ","
             " height=(int)" + std::to_string(capture_height) + ","
             " framerate=(fraction)" + std::to_string(framerate) +"/1 !"
-            " videoconvert ! videoscale !"
-            " video/x-raw,"
-            " width=(int)" + std::to_string(display_width) + ","
-            " height=(int)" + std::to_string(display_height) + " ! appsink";
+            " decodebin ! videoconvert ! queue !"
+            " appsink";
 }
 
 cv::VideoCapture streamCapture::cap_RTSP()
@@ -102,9 +102,9 @@ void streamCapture::capture()
     }
 
     cout << "Capture is opened." << endl;
-    width = video_cap.get(3);
-    height = video_cap.get(4);
-    fps = video_cap.get(5);
+    // width = video_cap.get(3);
+    // height = video_cap.get(4);
+    // fps = video_cap.get(5);
     if (width == 0 && height == 0)
     {
         cout << "Capture can't capture frame." << endl;
@@ -120,22 +120,32 @@ void streamCapture::capture()
     createDirectory(dir_video_stame);
     while (true)
     {
+        int64 start = cv::getTickCount();
         // outputVideo.open(genFile_name(), fourcc, fps, size);
-        while (true)
-        {
-            video_cap >> frame;
-            frameSeq.push_back(frame);
-            // outputVideo << frameSeq.front();
-            // count_frame++;
-            // if (count_frame >= (video_range * fps))
-            //     break;
-        }
-        // count_frame = 0;
-        if (!this->isRunning_)
-        {
-            // outputVideo.release();
+        video_cap >> frame;
+        frameSeq.push_back(frame);
+        if(cv::waitKey(3)>=0) {
             break;
         }
+        fps_now = cv::getTickFrequency() / (cv::getTickCount() - start);
+        std::cout<< u8"\033[2J\033[1;1H"; // linux clear screen console
+        // std::cout << "FPS : " << fps << std::endl;
+        cout << "FPS Min : " << fps_min << "FPS Max : " << fps_max << "FPS Curent now : " << fps_now << "FPS Avg : " << fps_avg << endl;
+        fps_sum += fps_now;
+        fps_avg = fps_sum / count_fps;
+        if(count_fps > 100){
+            if(fps_avg > fps_max)
+                fps_max = fps_avg;
+            else if(fps_avg < fps_min)
+                fps_min = fps_avg;
+        }else{
+            fps_min = fps_avg;
+            fps_max = fps_avg;
+        }
+        count_fps++;
+        // count_frame = 0;
+        if (!this->isRunning_)
+            break;
     }
     video_cap.release();
 }
@@ -150,22 +160,25 @@ void streamCapture::record_frame(){
     int count_frame = 0;
     while (this->isRunning_)
     {
-        outputVideo.open(genFile_name(), fourcc, fps, size);
-        while (true)
-        {
-            if(!frameSeq.empty()){
-                outputVideo << frameSeq.front();
-                frameSeq.pop_front();
-                count_frame++;
+        if(!frameSeq.empty()){
+            outputVideo.open(genFile_name(), fourcc, 50, size);
+            while (true)
+            {
+                if(!frameSeq.empty()){
+                    // outputVideo << frameSeq.front();
+                    frameSeq.pop_front();
+                    count_frame++;
+                    // cout << "frame :" << count_frame << endl;
+                }
+                if (count_frame >= (video_range * fps))
+                    break;
             }
-            if (count_frame >= (video_range * fps))
+            count_frame = 0;
+            if (!this->isRunning_)
+            {
+                outputVideo.release();
                 break;
-        }
-        count_frame = 0;
-        if (!this->isRunning_)
-        {
-            outputVideo.release();
-            break;
+            }
         }
     }
 }
