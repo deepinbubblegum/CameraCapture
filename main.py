@@ -1,16 +1,12 @@
 #!/usr/bin/python3
+from time import sleep
 from PiRecord import Record
 
-class CameraCapture():
-    def __init__(self):
-        record = Record()
-
-    def start(self):
-        pass
-
 def main():
-    cam_cap = CameraCapture()
-    cam_cap.start()
+    rec = Record()
+    rec.start()
+    while True:
+        sleep(0.5)
 
 if __name__ == '__main__':
     main()
