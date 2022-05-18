@@ -19,14 +19,14 @@ class Capture():
                 "format": "BGR888"
             },
             lores={
-                "size": (100, 100),
+                "size": (64, 64),
                 "format": "YUV420"
             },
             controls = {
-                "NoiseReductionMode": libcamera.NoiseReductionMode.Fast,
+                "NoiseReductionMode": libcamera.NoiseReductionMode.Fast,  # Fast # Minimal # HighQuality
                 "FrameDurationLimits": (FrameDurationMain, FrameDurationLores)
             },
-            buffer_count=6,
+            buffer_count=9,
         )
         self.picam2.configure(config)
         self.queue_frame = Queue()
@@ -37,6 +37,8 @@ class Capture():
             start = time.time()
             RGB = self.picam2.capture_array("main")
             frame_rgb = cv2.cvtColor(RGB, cv2.COLOR_BGR2RGB)
+            # yuv420 = self.picam2.capture_array("lores")
+            # frame_rgb = cv2.cvtColor(yuv420, cv2.COLOR_YUV420P2BGR)
             self.queue_frame.put(frame_rgb)
             end = time.time()
             seconds = end - start
