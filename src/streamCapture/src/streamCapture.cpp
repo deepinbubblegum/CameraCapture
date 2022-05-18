@@ -74,6 +74,7 @@ bool streamCapture::setStopCapture()
 {
     this->isRunning_ = false;
     task_.join();
+    task_record_.join();
     return true;
 }
 
@@ -86,6 +87,7 @@ bool streamCapture::setStartCapture()
 {
     this->task_ = std::thread(&streamCapture::capture, this);
     cout << "capture thread start.\n";
+    startRecord();
     return true;
 }
 
@@ -118,13 +120,44 @@ void streamCapture::capture()
     createDirectory(dir_video_stame);
     while (true)
     {
-        outputVideo.open(genFile_name(), fourcc, fps, size);
+        // outputVideo.open(genFile_name(), fourcc, fps, size);
         while (true)
         {
             video_cap >> frame;
             frameSeq.push_back(frame);
-            outputVideo << frameSeq.front();
-            count_frame++;
+            // outputVideo << frameSeq.front();
+            // count_frame++;
+            // if (count_frame >= (video_range * fps))
+            //     break;
+        }
+        // count_frame = 0;
+        if (!this->isRunning_)
+        {
+            // outputVideo.release();
+            break;
+        }
+    }
+    video_cap.release();
+}
+
+bool streamCapture::startRecord(){
+    this->task_record_ = std::thread(&streamCapture::record_frame, this);
+    cout << "record thread start.\n";
+    return true;
+}
+
+void streamCapture::record_frame(){
+    int count_frame = 0;
+    while (this->isRunning_)
+    {
+        outputVideo.open(genFile_name(), fourcc, fps, size);
+        while (true)
+        {
+            if(!frameSeq.empty()){
+                outputVideo << frameSeq.front();
+                frameSeq.pop_front();
+                count_frame++;
+            }
             if (count_frame >= (video_range * fps))
                 break;
         }
@@ -135,8 +168,9 @@ void streamCapture::capture()
             break;
         }
     }
-    video_cap.release();
 }
+
+
 // bool streamCapture::start(string url, double video_sec){
 //     video_range = video_sec;
 //     rtsp_uri = url;

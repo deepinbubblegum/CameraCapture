@@ -9,7 +9,7 @@ int main(){
     cout << "################# CameraCapture Pi version #################" << endl;
     int capture_width = 1920; //1280 ;
     int capture_height = 1080; //720 ;
-    int framerate = 30;
+    int framerate = 50;
     int display_width = 1920; //640 ;
     int display_height = 1080; //360 ;
 

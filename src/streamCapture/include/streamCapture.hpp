@@ -35,13 +35,14 @@ private:
     string genFile_name();
     string getDir_Video();
     void capture();
-    thread task_;
+    thread task_, task_record_;
     bool isRunning_;
 
     string gstreamer_pipeline(int capture_width, int capture_height, int framerate, int display_width, int display_height);
     cv::VideoCapture cap_RTSP();
     cv::VideoCapture cap_pi(string pipe);
-    
+    bool startRecord();
+    void record_frame();
 public:
     ~streamCapture() {
          this->setStopCapture();
