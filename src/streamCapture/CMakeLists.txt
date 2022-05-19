@@ -7,5 +7,6 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 add_library(streamCapture SHARED src/streamCapture.cpp)
 target_include_directories(streamCapture PUBLIC include)
 target_link_libraries(streamCapture ${raspicam_LIBS})
+target_link_libraries(streamCapture ${raspicam_CV_LIBS})
 target_link_libraries(streamCapture ${OpenCV_LIBS})
 

@@ -10,10 +10,10 @@ int main(){
     int capture_width = 1920; //1280 ;
     int capture_height = 1080; //720 ;
     int framerate = 50;
-    int display_width = 1920; //640 ;
-    int display_height = 1080; //360 ;
+    // int display_width = 1920; //640 ;
+    // int display_height = 1080; //360 ;
 
-    stream.setParamsCapture(capture_width, capture_height, framerate, display_width, display_height);
+    stream.setParamsCapture(capture_width, capture_height, framerate);
     stream.setStartCapture();
 
     while(true){

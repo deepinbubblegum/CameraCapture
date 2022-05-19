@@ -106,6 +106,7 @@ void streamCapture::capture()
     this->isRunning_ = true;
     NAME_DIR = getDir_Video();
     raspicam::RaspiCam_Cv Camera;
+    cout << "campi init" << endl;
     if(!Camera.open())
     {
         exit(0);
