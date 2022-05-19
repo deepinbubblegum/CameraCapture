@@ -40,11 +40,11 @@ bool streamCapture::setParamsCapture(int capture_width, int capture_height, int 
 
 string streamCapture::gstreamer_pipeline(int capture_width, int capture_height, int framerate, int display_width, int display_height) {
     return
-            " libcamerasrc ! video/x-raw,format=NV12,"
+            " libcamerasrc bitrate=5000000 ! video/x-raw,format=NV12,"
             " width=(int)" + std::to_string(capture_width) + ","
             " height=(int)" + std::to_string(capture_height) + ","
             " framerate=(fraction)" + std::to_string(framerate) +"/1 !"
-            " decodebin ! videoconvert ! queue !"
+            " v4l2convert !"
             " appsink";
 }
 
@@ -124,9 +124,6 @@ void streamCapture::capture()
         // outputVideo.open(genFile_name(), fourcc, fps, size);
         video_cap >> frame;
         frameSeq.push_back(frame);
-        if(cv::waitKey(3)>=0) {
-            break;
-        }
         fps_now = cv::getTickFrequency() / (cv::getTickCount() - start);
         std::cout<< u8"\033[2J\033[1;1H"; // linux clear screen console
         // std::cout << "FPS : " << fps << std::endl;
