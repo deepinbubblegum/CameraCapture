@@ -6,12 +6,13 @@ from queue import Queue
 from threading import Thread
 import time
 
+
 class Capture():
     def __init__(self):
         print("init record")
         self.picam2 = Picamera2()
-        FrameDurationMain = (int)((1/50) * pow(10, 6))
-        FrameDurationLores = (int)((1/1)* pow(10, 6))
+        FrameDurationMain = (int)((1/29.97) * pow(10, 6))
+        FrameDurationLores = (int)((1/29.97)* pow(10, 6))
         print(FrameDurationMain, FrameDurationLores)
         config = self.picam2.video_configuration(
             main={
@@ -19,7 +20,7 @@ class Capture():
                 "format": "BGR888"
             },
             lores={
-                "size": (64, 64),
+                "size": (1280, 720),
                 "format": "YUV420"
             },
             controls = {
@@ -34,16 +35,23 @@ class Capture():
 
     def update(self):
         while self.isRuning:
-            start = time.time()
-            RGB = self.picam2.capture_array("main")
-            frame_rgb = cv2.cvtColor(RGB, cv2.COLOR_BGR2RGB)
-            # yuv420 = self.picam2.capture_array("lores")
+            e1 = cv2.getTickCount()
+            # RGB = self.picam2.capture_array("main")
+            # frame_rgb = cv2.cvtColor(RGB, cv2.COLOR_BGR2RGB)
+            yuv420 = self.picam2.capture_array("lores")
             # frame_rgb = cv2.cvtColor(yuv420, cv2.COLOR_YUV420P2BGR)
-            self.queue_frame.put(frame_rgb)
-            end = time.time()
-            seconds = end - start
+            # self.queue_frame.put(frame_rgb)
+            thr_p = Thread(target=self.queue_put, args=(yuv420, ))
+            thr_p.daemon = True
+            thr_p.start()
+            e2 = cv2.getTickCount()
+            time = (e2 - e1)/ cv2.getTickFrequency()
             print("\033[2J\033[1;1H")
-            print(seconds)
+            print(1/time)
+
+    def queue_put(self, frame):
+        
+        self.queue_frame.put(frame)
 
     def read(self):
         return self.queue_frame.get()
@@ -57,7 +65,7 @@ class Capture():
         self.isRuning = False
 
     def start(self):
-        self.picam2.set_controls({"AwbEnable": 1, "AeEnable": 1})
+        self.picam2.set_controls({"AwbEnable": 15, "AeEnable": 15})
         self.picam2.start()
         self.isRuning = True
         thr = Thread(target=self.update, args=())
