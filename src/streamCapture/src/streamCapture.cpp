@@ -38,6 +38,14 @@ bool streamCapture::setParamsCapture(int capture_width, int capture_height, int 
     return true;
 }
 
+bool streamCapture::setParamsCapture(int capture_width, int capture_height, int framerate)
+{
+    width = capture_width;
+    height = capture_height;
+    fps = framerate;
+    return true;
+}
+
 string streamCapture::gstreamer_pipeline(int capture_width, int capture_height, int framerate, int display_width, int display_height) {
     return
             " libcamerasrc bitrate=5000000 ! video/x-raw,format=NV12,"
@@ -58,6 +66,8 @@ cv::VideoCapture streamCapture::cap_RTSP()
     }
     return cap;
 }
+
+
 
 cv::VideoCapture streamCapture::cap_pi(string pipe)
 {
@@ -95,8 +105,8 @@ void streamCapture::capture()
 {
     this->isRunning_ = true;
     NAME_DIR = getDir_Video();
-
-    if(!video_cap.isOpened())
+    raspicam::RaspiCam_Cv Camera;
+    if(!Camera.open())
     {
         exit(0);
     }
@@ -122,7 +132,9 @@ void streamCapture::capture()
     {
         int64 start = cv::getTickCount();
         // outputVideo.open(genFile_name(), fourcc, fps, size);
-        video_cap >> frame;
+        // video_cap >> frame;
+        Camera.grab();
+        Camera.retrieve (frame);
         frameSeq.push_back(frame);
         fps_now = cv::getTickFrequency() / (cv::getTickCount() - start);
         std::cout<< u8"\033[2J\033[1;1H"; // linux clear screen console
@@ -144,7 +156,7 @@ void streamCapture::capture()
         if (!this->isRunning_)
             break;
     }
-    video_cap.release();
+    Camera.release();
 }
 
 bool streamCapture::startRecord(){
