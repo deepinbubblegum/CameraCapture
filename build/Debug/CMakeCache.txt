@@ -14,9 +14,6 @@
 # EXTERNAL cache entries
 ########################
 
-//Build using shared libraries
-BUILD_SHARED_LIBS:BOOL=ON
-
 //The directory containing a CMake configuration file for Boost.
 Boost_DIR:PATH=/usr/lib/arm-linux-gnueabihf/cmake/Boost-1.74.0
 
@@ -288,29 +285,11 @@ CameraCapture_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug
 //Value Computed by CMake
 CameraCapture_SOURCE_DIR:STATIC=/home/pi/CameraCapture
 
-//Path to a library.
-EXIF_LIBRARY:FILEPATH=/usr/lib/arm-linux-gnueabihf/libexif.so
-
-//Path to a library.
-JPEG_LIBRARY:FILEPATH=/usr/lib/arm-linux-gnueabihf/libjpeg.so
-
-//The directory containing a CMake configuration file for OpenCV.
-OpenCV_DIR:PATH=OpenCV_DIR-NOTFOUND
-
-//pkg-config executable
-PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
-
-//Path to a library.
-PNG_LIBRARY:FILEPATH=/usr/lib/arm-linux-gnueabihf/libpng.so
-
 //Value Computed by CMake
 PiFrame_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug/src/piframe
 
 //Value Computed by CMake
 PiFrame_SOURCE_DIR:STATIC=/home/pi/CameraCapture/src/piframe
-
-//Path to a library.
-TIFF_LIBRARY:FILEPATH=/usr/lib/arm-linux-gnueabihf/libtiff.so
 
 //The directory containing a CMake configuration file for boost_headers.
 boost_headers_DIR:PATH=/usr/lib/arm-linux-gnueabihf/cmake/boost_headers-1.74.0
@@ -325,82 +304,7 @@ capture_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug/src/capture
 capture_SOURCE_DIR:STATIC=/home/pi/CameraCapture/src/capture
 
 //Dependencies for the target
-encoders_LIB_DEPENDS:STATIC=general;jpeg;
-
-//Dependencies for the target
-images_LIB_DEPENDS:STATIC=general;jpeg;general;exif;general;png;general;tiff;
-
-//Value Computed by CMake
-libcamera-apps_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug/libcamera-apps
-
-//Value Computed by CMake
-libcamera-apps_SOURCE_DIR:STATIC=/home/pi/CameraCapture/libcamera-apps
-
-//Value Computed by CMake
-libcamera-hello_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug/libcamera-apps/apps
-
-//Value Computed by CMake
-libcamera-hello_SOURCE_DIR:STATIC=/home/pi/CameraCapture/libcamera-apps/apps
-
-//Value Computed by CMake
-libcamera-jpeg_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug/libcamera-apps/apps
-
-//Value Computed by CMake
-libcamera-jpeg_SOURCE_DIR:STATIC=/home/pi/CameraCapture/libcamera-apps/apps
-
-//Value Computed by CMake
-libcamera-raw_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug/libcamera-apps/apps
-
-//Value Computed by CMake
-libcamera-raw_SOURCE_DIR:STATIC=/home/pi/CameraCapture/libcamera-apps/apps
-
-//Value Computed by CMake
-libcamera-still_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug/libcamera-apps/apps
-
-//Value Computed by CMake
-libcamera-still_SOURCE_DIR:STATIC=/home/pi/CameraCapture/libcamera-apps/apps
-
-//Value Computed by CMake
-libcamera-vid_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug/libcamera-apps/apps
-
-//Value Computed by CMake
-libcamera-vid_SOURCE_DIR:STATIC=/home/pi/CameraCapture/libcamera-apps/apps
-
-//Dependencies for the target
-libcamera_app_LIB_DEPENDS:STATIC=general;pthread;general;preview;general;/usr/lib/arm-linux-gnueabihf/libcamera.so;general;/usr/lib/arm-linux-gnueabihf/libcamera-base.so;general;Boost::program_options;general;post_processing_stages;
-
-//Path to a library.
-pkgcfg_lib_EPOXY_epoxy:FILEPATH=/usr/lib/arm-linux-gnueabihf/libepoxy.so
-
-//Path to a library.
-pkgcfg_lib_LIBCAMERA_camera:FILEPATH=/usr/lib/arm-linux-gnueabihf/libcamera.so
-
-//Path to a library.
-pkgcfg_lib_LIBCAMERA_camera-base:FILEPATH=/usr/lib/arm-linux-gnueabihf/libcamera-base.so
-
-//Path to a library.
-pkgcfg_lib_LIBDRM_drm:FILEPATH=/usr/lib/arm-linux-gnueabihf/libdrm.so
-
-//Path to a library.
-pkgcfg_lib_QTCORE_Qt5Core:FILEPATH=/usr/lib/arm-linux-gnueabihf/libQt5Core.so
-
-//Path to a library.
-pkgcfg_lib_QTWIDGETS_Qt5Core:FILEPATH=/usr/lib/arm-linux-gnueabihf/libQt5Core.so
-
-//Path to a library.
-pkgcfg_lib_QTWIDGETS_Qt5Gui:FILEPATH=/usr/lib/arm-linux-gnueabihf/libQt5Gui.so
-
-//Path to a library.
-pkgcfg_lib_QTWIDGETS_Qt5Widgets:FILEPATH=/usr/lib/arm-linux-gnueabihf/libQt5Widgets.so
-
-//Path to a library.
-pkgcfg_lib_X11_X11:FILEPATH=/usr/lib/arm-linux-gnueabihf/libX11.so
-
-//Dependencies for the target
-post_processing_stages_LIB_DEPENDS:STATIC=general;images;
-
-//Dependencies for the target
-preview_LIB_DEPENDS:STATIC=general;drm;general;X11;general;epoxy;general;Qt5Core;general;Qt5Widgets;general;Qt5Gui;general;Qt5Core;
+libcamera_app_LIB_DEPENDS:STATIC=general;pthread;general;preview;general;Boost::program_options;general;post_processing_stages;
 
 
 ########################
@@ -582,257 +486,12 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
-EPOXY_CFLAGS:INTERNAL=
-EPOXY_CFLAGS_I:INTERNAL=
-EPOXY_CFLAGS_OTHER:INTERNAL=
-EPOXY_FOUND:INTERNAL=1
-EPOXY_INCLUDEDIR:INTERNAL=/usr/include
-EPOXY_INCLUDE_DIRS:INTERNAL=
-EPOXY_LDFLAGS:INTERNAL=-lepoxy
-EPOXY_LDFLAGS_OTHER:INTERNAL=
-EPOXY_LIBDIR:INTERNAL=/usr/lib/arm-linux-gnueabihf
-EPOXY_LIBRARIES:INTERNAL=epoxy
-EPOXY_LIBRARY_DIRS:INTERNAL=
-EPOXY_LIBS:INTERNAL=
-EPOXY_LIBS_L:INTERNAL=
-EPOXY_LIBS_OTHER:INTERNAL=
-EPOXY_LIBS_PATHS:INTERNAL=
-EPOXY_MODULE_NAME:INTERNAL=epoxy
-EPOXY_PREFIX:INTERNAL=/usr
-EPOXY_STATIC_CFLAGS:INTERNAL=
-EPOXY_STATIC_CFLAGS_I:INTERNAL=
-EPOXY_STATIC_CFLAGS_OTHER:INTERNAL=
-EPOXY_STATIC_INCLUDE_DIRS:INTERNAL=
-EPOXY_STATIC_LDFLAGS:INTERNAL=-lepoxy;-ldl;-lGL;-lEGL
-EPOXY_STATIC_LDFLAGS_OTHER:INTERNAL=
-EPOXY_STATIC_LIBDIR:INTERNAL=
-EPOXY_STATIC_LIBRARIES:INTERNAL=epoxy;dl;GL;EGL
-EPOXY_STATIC_LIBRARY_DIRS:INTERNAL=
-EPOXY_STATIC_LIBS:INTERNAL=
-EPOXY_STATIC_LIBS_L:INTERNAL=
-EPOXY_STATIC_LIBS_OTHER:INTERNAL=
-EPOXY_STATIC_LIBS_PATHS:INTERNAL=
-EPOXY_VERSION:INTERNAL=1.5.5
-EPOXY_epoxy_INCLUDEDIR:INTERNAL=
-EPOXY_epoxy_LIBDIR:INTERNAL=
-EPOXY_epoxy_PREFIX:INTERNAL=
-EPOXY_epoxy_VERSION:INTERNAL=
 //Details about finding Boost
 FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[/usr/lib/arm-linux-gnueabihf/cmake/Boost-1.74.0/BoostConfig.cmake][cfound components: program_options ][v1.74.0()]
-//Details about finding PkgConfig
-FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.29.2()]
-LIBCAMERA_CFLAGS:INTERNAL=-I/usr/include/libcamera
-LIBCAMERA_CFLAGS_I:INTERNAL=
-LIBCAMERA_CFLAGS_OTHER:INTERNAL=
-LIBCAMERA_FOUND:INTERNAL=1
-LIBCAMERA_INCLUDEDIR:INTERNAL=/usr/include
-LIBCAMERA_INCLUDE_DIRS:INTERNAL=/usr/include/libcamera
-LIBCAMERA_LDFLAGS:INTERNAL=-lcamera;-lcamera-base
-LIBCAMERA_LDFLAGS_OTHER:INTERNAL=
-LIBCAMERA_LIBDIR:INTERNAL=/usr/lib/arm-linux-gnueabihf
-LIBCAMERA_LIBRARIES:INTERNAL=camera;camera-base
-LIBCAMERA_LIBRARY_DIRS:INTERNAL=
-LIBCAMERA_LIBS:INTERNAL=
-LIBCAMERA_LIBS_L:INTERNAL=
-LIBCAMERA_LIBS_OTHER:INTERNAL=
-LIBCAMERA_LIBS_PATHS:INTERNAL=
-LIBCAMERA_MODULE_NAME:INTERNAL=libcamera
-LIBCAMERA_PREFIX:INTERNAL=/usr
-LIBCAMERA_STATIC_CFLAGS:INTERNAL=-I/usr/include/libcamera
-LIBCAMERA_STATIC_CFLAGS_I:INTERNAL=
-LIBCAMERA_STATIC_CFLAGS_OTHER:INTERNAL=
-LIBCAMERA_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/libcamera
-LIBCAMERA_STATIC_LDFLAGS:INTERNAL=-lcamera;-lcamera-base
-LIBCAMERA_STATIC_LDFLAGS_OTHER:INTERNAL=
-LIBCAMERA_STATIC_LIBDIR:INTERNAL=
-LIBCAMERA_STATIC_LIBRARIES:INTERNAL=camera;camera-base
-LIBCAMERA_STATIC_LIBRARY_DIRS:INTERNAL=
-LIBCAMERA_STATIC_LIBS:INTERNAL=
-LIBCAMERA_STATIC_LIBS_L:INTERNAL=
-LIBCAMERA_STATIC_LIBS_OTHER:INTERNAL=
-LIBCAMERA_STATIC_LIBS_PATHS:INTERNAL=
-LIBCAMERA_VERSION:INTERNAL=0.0.0
-LIBCAMERA_libcamera_INCLUDEDIR:INTERNAL=
-LIBCAMERA_libcamera_LIBDIR:INTERNAL=
-LIBCAMERA_libcamera_PREFIX:INTERNAL=
-LIBCAMERA_libcamera_VERSION:INTERNAL=
-LIBDRM_CFLAGS:INTERNAL=-I/usr/include/libdrm
-LIBDRM_CFLAGS_I:INTERNAL=
-LIBDRM_CFLAGS_OTHER:INTERNAL=
-LIBDRM_FOUND:INTERNAL=1
-LIBDRM_INCLUDEDIR:INTERNAL=/usr/include
-LIBDRM_INCLUDE_DIRS:INTERNAL=/usr/include/libdrm
-LIBDRM_LDFLAGS:INTERNAL=-ldrm
-LIBDRM_LDFLAGS_OTHER:INTERNAL=
-LIBDRM_LIBDIR:INTERNAL=/usr/lib/arm-linux-gnueabihf
-LIBDRM_LIBRARIES:INTERNAL=drm
-LIBDRM_LIBRARY_DIRS:INTERNAL=
-LIBDRM_LIBS:INTERNAL=
-LIBDRM_LIBS_L:INTERNAL=
-LIBDRM_LIBS_OTHER:INTERNAL=
-LIBDRM_LIBS_PATHS:INTERNAL=
-LIBDRM_MODULE_NAME:INTERNAL=libdrm
-LIBDRM_PREFIX:INTERNAL=/usr
-LIBDRM_STATIC_CFLAGS:INTERNAL=-I/usr/include/libdrm
-LIBDRM_STATIC_CFLAGS_I:INTERNAL=
-LIBDRM_STATIC_CFLAGS_OTHER:INTERNAL=
-LIBDRM_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/libdrm
-LIBDRM_STATIC_LDFLAGS:INTERNAL=-ldrm
-LIBDRM_STATIC_LDFLAGS_OTHER:INTERNAL=
-LIBDRM_STATIC_LIBDIR:INTERNAL=
-LIBDRM_STATIC_LIBRARIES:INTERNAL=drm
-LIBDRM_STATIC_LIBRARY_DIRS:INTERNAL=
-LIBDRM_STATIC_LIBS:INTERNAL=
-LIBDRM_STATIC_LIBS_L:INTERNAL=
-LIBDRM_STATIC_LIBS_OTHER:INTERNAL=
-LIBDRM_STATIC_LIBS_PATHS:INTERNAL=
-LIBDRM_VERSION:INTERNAL=2.4.104
-LIBDRM_libdrm_INCLUDEDIR:INTERNAL=
-LIBDRM_libdrm_LIBDIR:INTERNAL=
-LIBDRM_libdrm_PREFIX:INTERNAL=
-LIBDRM_libdrm_VERSION:INTERNAL=
-//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
-PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
-QTCORE_CFLAGS:INTERNAL=-DQT_CORE_LIB;-I/usr/include/arm-linux-gnueabihf/qt5/QtCore;-I/usr/include/arm-linux-gnueabihf/qt5
-QTCORE_CFLAGS_I:INTERNAL=
-QTCORE_CFLAGS_OTHER:INTERNAL=-DQT_CORE_LIB
-QTCORE_FOUND:INTERNAL=1
-QTCORE_INCLUDEDIR:INTERNAL=/usr/include/arm-linux-gnueabihf/qt5
-QTCORE_INCLUDE_DIRS:INTERNAL=/usr/include/arm-linux-gnueabihf/qt5/QtCore;/usr/include/arm-linux-gnueabihf/qt5
-QTCORE_LDFLAGS:INTERNAL=-lQt5Core
-QTCORE_LDFLAGS_OTHER:INTERNAL=
-QTCORE_LIBDIR:INTERNAL=/usr/lib/arm-linux-gnueabihf
-QTCORE_LIBRARIES:INTERNAL=Qt5Core
-QTCORE_LIBRARY_DIRS:INTERNAL=
-QTCORE_LIBS:INTERNAL=
-QTCORE_LIBS_L:INTERNAL=
-QTCORE_LIBS_OTHER:INTERNAL=
-QTCORE_LIBS_PATHS:INTERNAL=
-QTCORE_MODULE_NAME:INTERNAL=Qt5Core
-QTCORE_PREFIX:INTERNAL=/usr
-QTCORE_Qt5Core_INCLUDEDIR:INTERNAL=
-QTCORE_Qt5Core_LIBDIR:INTERNAL=
-QTCORE_Qt5Core_PREFIX:INTERNAL=
-QTCORE_Qt5Core_VERSION:INTERNAL=
-QTCORE_STATIC_CFLAGS:INTERNAL=-DQT_CORE_LIB;-I/usr/include/arm-linux-gnueabihf/qt5/QtCore;-I/usr/include/arm-linux-gnueabihf/qt5
-QTCORE_STATIC_CFLAGS_I:INTERNAL=
-QTCORE_STATIC_CFLAGS_OTHER:INTERNAL=-DQT_CORE_LIB
-QTCORE_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/arm-linux-gnueabihf/qt5/QtCore;/usr/include/arm-linux-gnueabihf/qt5
-QTCORE_STATIC_LDFLAGS:INTERNAL=-lQt5Core
-QTCORE_STATIC_LDFLAGS_OTHER:INTERNAL=
-QTCORE_STATIC_LIBDIR:INTERNAL=
-QTCORE_STATIC_LIBRARIES:INTERNAL=Qt5Core
-QTCORE_STATIC_LIBRARY_DIRS:INTERNAL=
-QTCORE_STATIC_LIBS:INTERNAL=
-QTCORE_STATIC_LIBS_L:INTERNAL=
-QTCORE_STATIC_LIBS_OTHER:INTERNAL=
-QTCORE_STATIC_LIBS_PATHS:INTERNAL=
-QTCORE_VERSION:INTERNAL=5.15.2
-QTWIDGETS_CFLAGS:INTERNAL=-DQT_WIDGETS_LIB;-DQT_GUI_LIB;-DQT_CORE_LIB;-I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets;-I/usr/include/arm-linux-gnueabihf/qt5;-I/usr/include/arm-linux-gnueabihf/qt5/QtGui;-I/usr/include/arm-linux-gnueabihf/qt5;-I/usr/include/arm-linux-gnueabihf/qt5/QtCore;-I/usr/include/arm-linux-gnueabihf/qt5
-QTWIDGETS_CFLAGS_I:INTERNAL=
-QTWIDGETS_CFLAGS_OTHER:INTERNAL=-DQT_WIDGETS_LIB;-DQT_GUI_LIB;-DQT_CORE_LIB
-QTWIDGETS_FOUND:INTERNAL=1
-QTWIDGETS_INCLUDEDIR:INTERNAL=/usr/include/arm-linux-gnueabihf/qt5
-QTWIDGETS_INCLUDE_DIRS:INTERNAL=/usr/include/arm-linux-gnueabihf/qt5/QtWidgets;/usr/include/arm-linux-gnueabihf/qt5;/usr/include/arm-linux-gnueabihf/qt5/QtGui;/usr/include/arm-linux-gnueabihf/qt5;/usr/include/arm-linux-gnueabihf/qt5/QtCore;/usr/include/arm-linux-gnueabihf/qt5
-QTWIDGETS_LDFLAGS:INTERNAL=-lQt5Widgets;-lQt5Gui;-lQt5Core
-QTWIDGETS_LDFLAGS_OTHER:INTERNAL=
-QTWIDGETS_LIBDIR:INTERNAL=/usr/lib/arm-linux-gnueabihf
-QTWIDGETS_LIBRARIES:INTERNAL=Qt5Widgets;Qt5Gui;Qt5Core
-QTWIDGETS_LIBRARY_DIRS:INTERNAL=
-QTWIDGETS_LIBS:INTERNAL=
-QTWIDGETS_LIBS_L:INTERNAL=
-QTWIDGETS_LIBS_OTHER:INTERNAL=
-QTWIDGETS_LIBS_PATHS:INTERNAL=
-QTWIDGETS_MODULE_NAME:INTERNAL=Qt5Widgets
-QTWIDGETS_PREFIX:INTERNAL=/usr
-QTWIDGETS_Qt5Widgets_INCLUDEDIR:INTERNAL=
-QTWIDGETS_Qt5Widgets_LIBDIR:INTERNAL=
-QTWIDGETS_Qt5Widgets_PREFIX:INTERNAL=
-QTWIDGETS_Qt5Widgets_VERSION:INTERNAL=
-QTWIDGETS_STATIC_CFLAGS:INTERNAL=-DQT_WIDGETS_LIB;-DQT_GUI_LIB;-DQT_CORE_LIB;-I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets;-I/usr/include/arm-linux-gnueabihf/qt5;-I/usr/include/arm-linux-gnueabihf/qt5/QtGui;-I/usr/include/arm-linux-gnueabihf/qt5;-I/usr/include/arm-linux-gnueabihf/qt5/QtCore;-I/usr/include/arm-linux-gnueabihf/qt5
-QTWIDGETS_STATIC_CFLAGS_I:INTERNAL=
-QTWIDGETS_STATIC_CFLAGS_OTHER:INTERNAL=-DQT_WIDGETS_LIB;-DQT_GUI_LIB;-DQT_CORE_LIB
-QTWIDGETS_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/arm-linux-gnueabihf/qt5/QtWidgets;/usr/include/arm-linux-gnueabihf/qt5;/usr/include/arm-linux-gnueabihf/qt5/QtGui;/usr/include/arm-linux-gnueabihf/qt5;/usr/include/arm-linux-gnueabihf/qt5/QtCore;/usr/include/arm-linux-gnueabihf/qt5
-QTWIDGETS_STATIC_LDFLAGS:INTERNAL=-lQt5Widgets;-lQt5Gui;-lQt5Core
-QTWIDGETS_STATIC_LDFLAGS_OTHER:INTERNAL=
-QTWIDGETS_STATIC_LIBDIR:INTERNAL=
-QTWIDGETS_STATIC_LIBRARIES:INTERNAL=Qt5Widgets;Qt5Gui;Qt5Core
-QTWIDGETS_STATIC_LIBRARY_DIRS:INTERNAL=
-QTWIDGETS_STATIC_LIBS:INTERNAL=
-QTWIDGETS_STATIC_LIBS_L:INTERNAL=
-QTWIDGETS_STATIC_LIBS_OTHER:INTERNAL=
-QTWIDGETS_STATIC_LIBS_PATHS:INTERNAL=
-QTWIDGETS_VERSION:INTERNAL=5.15.2
-X11_CFLAGS:INTERNAL=
-X11_CFLAGS_I:INTERNAL=
-X11_CFLAGS_OTHER:INTERNAL=
-X11_FOUND:INTERNAL=1
-X11_INCLUDEDIR:INTERNAL=/usr/include
-X11_INCLUDE_DIRS:INTERNAL=
-X11_LDFLAGS:INTERNAL=-lX11
-X11_LDFLAGS_OTHER:INTERNAL=
-X11_LIBDIR:INTERNAL=/usr/lib/arm-linux-gnueabihf
-X11_LIBRARIES:INTERNAL=X11
-X11_LIBRARY_DIRS:INTERNAL=
-X11_LIBS:INTERNAL=
-X11_LIBS_L:INTERNAL=
-X11_LIBS_OTHER:INTERNAL=
-X11_LIBS_PATHS:INTERNAL=
-X11_MODULE_NAME:INTERNAL=x11
-X11_PREFIX:INTERNAL=/usr
-X11_STATIC_CFLAGS:INTERNAL=
-X11_STATIC_CFLAGS_I:INTERNAL=
-X11_STATIC_CFLAGS_OTHER:INTERNAL=
-X11_STATIC_INCLUDE_DIRS:INTERNAL=
-X11_STATIC_LDFLAGS:INTERNAL=-lX11;-lpthread;-lxcb;-lXau;-lXdmcp
-X11_STATIC_LDFLAGS_OTHER:INTERNAL=
-X11_STATIC_LIBDIR:INTERNAL=
-X11_STATIC_LIBRARIES:INTERNAL=X11;pthread;xcb;Xau;Xdmcp
-X11_STATIC_LIBRARY_DIRS:INTERNAL=
-X11_STATIC_LIBS:INTERNAL=
-X11_STATIC_LIBS_L:INTERNAL=
-X11_STATIC_LIBS_OTHER:INTERNAL=
-X11_STATIC_LIBS_PATHS:INTERNAL=
-X11_VERSION:INTERNAL=1.7.2
-X11_x11_INCLUDEDIR:INTERNAL=
-X11_x11_LIBDIR:INTERNAL=
-X11_x11_PREFIX:INTERNAL=
-X11_x11_VERSION:INTERNAL=
 //CMAKE_INSTALL_PREFIX during last run
 _GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=/usr/local
-__pkg_config_arguments_EPOXY:INTERNAL=QUIET;epoxy
-__pkg_config_arguments_LIBCAMERA:INTERNAL=REQUIRED;libcamera
-__pkg_config_arguments_LIBDRM:INTERNAL=QUIET;libdrm
-__pkg_config_arguments_QTCORE:INTERNAL=QUIET;Qt5Core
-__pkg_config_arguments_QTWIDGETS:INTERNAL=QUIET;Qt5Widgets
-__pkg_config_arguments_X11:INTERNAL=QUIET;x11
-__pkg_config_checked_EPOXY:INTERNAL=1
-__pkg_config_checked_LIBCAMERA:INTERNAL=1
-__pkg_config_checked_LIBDRM:INTERNAL=1
-__pkg_config_checked_QTCORE:INTERNAL=1
-__pkg_config_checked_QTWIDGETS:INTERNAL=1
-__pkg_config_checked_X11:INTERNAL=1
 //ADVANCED property for variable: boost_headers_DIR
 boost_headers_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: boost_program_options_DIR
 boost_program_options_DIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_EPOXY_epoxy
-pkgcfg_lib_EPOXY_epoxy-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_LIBCAMERA_camera
-pkgcfg_lib_LIBCAMERA_camera-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_LIBCAMERA_camera-base
-pkgcfg_lib_LIBCAMERA_camera-base-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_LIBDRM_drm
-pkgcfg_lib_LIBDRM_drm-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_QTCORE_Qt5Core
-pkgcfg_lib_QTCORE_Qt5Core-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_QTWIDGETS_Qt5Core
-pkgcfg_lib_QTWIDGETS_Qt5Core-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_QTWIDGETS_Qt5Gui
-pkgcfg_lib_QTWIDGETS_Qt5Gui-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_QTWIDGETS_Qt5Widgets
-pkgcfg_lib_QTWIDGETS_Qt5Widgets-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_X11_X11
-pkgcfg_lib_X11_X11-ADVANCED:INTERNAL=1
-prefix_result:INTERNAL=/usr/lib/arm-linux-gnueabihf
 
