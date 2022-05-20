@@ -9,4 +9,3 @@ set(CMAKE_INSTALL_RPATH "")
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
 
 add_subdirectory(src)
-add_subdirectory(libcamera-apps)
