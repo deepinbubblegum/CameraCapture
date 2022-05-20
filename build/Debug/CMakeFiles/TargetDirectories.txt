@@ -2,6 +2,6 @@
 /home/pi/CameraCapture/build/Debug/CMakeFiles/edit_cache.dir
 /home/pi/CameraCapture/build/Debug/src/CMakeFiles/rebuild_cache.dir
 /home/pi/CameraCapture/build/Debug/src/CMakeFiles/edit_cache.dir
-/home/pi/CameraCapture/build/Debug/src/picapture/CMakeFiles/rebuild_cache.dir
-/home/pi/CameraCapture/build/Debug/src/picapture/CMakeFiles/edit_cache.dir
-/home/pi/CameraCapture/build/Debug/src/picapture/CMakeFiles/PiCapture.dir
+/home/pi/CameraCapture/build/Debug/src/piframe/CMakeFiles/rebuild_cache.dir
+/home/pi/CameraCapture/build/Debug/src/piframe/CMakeFiles/edit_cache.dir
+/home/pi/CameraCapture/build/Debug/src/piframe/CMakeFiles/PiFrame.dir

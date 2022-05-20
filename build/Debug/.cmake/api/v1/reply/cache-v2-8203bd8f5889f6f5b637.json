@@ -1224,6 +1224,30 @@
 			],
 			"type" : "STATIC",
 			"value" : "/home/pi/CameraCapture/src/picapture"
+		},
+		{
+			"name" : "PiFrame_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/pi/CameraCapture/build/Debug/src/piframe"
+		},
+		{
+			"name" : "PiFrame_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/pi/CameraCapture/src/piframe"
 		}
 	],
 	"kind" : "cache",

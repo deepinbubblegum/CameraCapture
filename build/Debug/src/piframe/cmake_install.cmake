@@ -1,4 +1,4 @@
-# Install script for directory: /home/pi/CameraCapture/src
+# Install script for directory: /home/pi/CameraCapture/src/piframe
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,11 +40,5 @@ endif()
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
   set(CMAKE_OBJDUMP "/usr/bin/arm-linux-gnueabihf-objdump")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for each subdirectory.
-  include("/home/pi/CameraCapture/build/Debug/src/piframe/cmake_install.cmake")
-
 endif()
 

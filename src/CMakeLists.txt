@@ -1,1 +1,1 @@
-add_subdirectory(picapture)
+add_subdirectory(piframe)

@@ -235,6 +235,12 @@ PiCapture_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug/src/picapture
 //Value Computed by CMake
 PiCapture_SOURCE_DIR:STATIC=/home/pi/CameraCapture/src/picapture
 
+//Value Computed by CMake
+PiFrame_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug/src/piframe
+
+//Value Computed by CMake
+PiFrame_SOURCE_DIR:STATIC=/home/pi/CameraCapture/src/piframe
+
 
 ########################
 # INTERNAL cache entries

@@ -99,14 +99,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/CameraCapture/build/Debug/CMakeFiles /home/pi/CameraCapture/build/Debug//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
+	cd /home/pi/CameraCapture/build/Debug && $(CMAKE_COMMAND) -E cmake_progress_start /home/pi/CameraCapture/build/Debug/CMakeFiles /home/pi/CameraCapture/build/Debug/src/piframe//CMakeFiles/progress.marks
+	cd /home/pi/CameraCapture/build/Debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/piframe/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/CameraCapture/build/Debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
+	cd /home/pi/CameraCapture/build/Debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/piframe/clean
 .PHONY : clean
 
 # The main clean target
@@ -116,31 +116,60 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/pi/CameraCapture/build/Debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/piframe/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/pi/CameraCapture/build/Debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/piframe/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/pi/CameraCapture/build/Debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named PiFrame
+# Convenience name for target.
+src/piframe/CMakeFiles/PiFrame.dir/rule:
+	cd /home/pi/CameraCapture/build/Debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/piframe/CMakeFiles/PiFrame.dir/rule
+.PHONY : src/piframe/CMakeFiles/PiFrame.dir/rule
 
-# Build rule for target.
-PiFrame: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 PiFrame
+# Convenience name for target.
+PiFrame: src/piframe/CMakeFiles/PiFrame.dir/rule
+
 .PHONY : PiFrame
 
 # fast build rule for target.
 PiFrame/fast:
-	$(MAKE) $(MAKESILENT) -f src/piframe/CMakeFiles/PiFrame.dir/build.make src/piframe/CMakeFiles/PiFrame.dir/build
+	cd /home/pi/CameraCapture/build/Debug && $(MAKE) $(MAKESILENT) -f src/piframe/CMakeFiles/PiFrame.dir/build.make src/piframe/CMakeFiles/PiFrame.dir/build
 .PHONY : PiFrame/fast
+
+main.o: main.cpp.o
+
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	cd /home/pi/CameraCapture/build/Debug && $(MAKE) $(MAKESILENT) -f src/piframe/CMakeFiles/PiFrame.dir/build.make src/piframe/CMakeFiles/PiFrame.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	cd /home/pi/CameraCapture/build/Debug && $(MAKE) $(MAKESILENT) -f src/piframe/CMakeFiles/PiFrame.dir/build.make src/piframe/CMakeFiles/PiFrame.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	cd /home/pi/CameraCapture/build/Debug && $(MAKE) $(MAKESILENT) -f src/piframe/CMakeFiles/PiFrame.dir/build.make src/piframe/CMakeFiles/PiFrame.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -151,6 +180,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... PiFrame"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 
@@ -162,6 +194,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/pi/CameraCapture/build/Debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -32,14 +32,14 @@
 					"source" : "src"
 				},
 				{
-					"build" : "src/picapture",
+					"build" : "src/piframe",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.0.0"
 					},
 					"parentIndex" : 1,
 					"projectIndex" : 1,
-					"source" : "src/picapture",
+					"source" : "src/piframe",
 					"targetIndexes" : 
 					[
 						0
@@ -66,7 +66,7 @@
 					[
 						2
 					],
-					"name" : "PiCapture",
+					"name" : "PiFrame",
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
@@ -78,9 +78,9 @@
 			[
 				{
 					"directoryIndex" : 2,
-					"id" : "PiCapture::@a6370d552708cffd8887",
-					"jsonFile" : "target-PiCapture-Debug-0e76f14282b7a9c61d46.json",
-					"name" : "PiCapture",
+					"id" : "PiFrame::@0efd94688106b1be4fea",
+					"jsonFile" : "target-PiFrame-Debug-946d690d6518b017bb1c.json",
+					"name" : "PiFrame",
 					"projectIndex" : 1
 				}
 			]

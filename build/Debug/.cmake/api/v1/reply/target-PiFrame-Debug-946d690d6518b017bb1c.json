@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "bin/PiCapture"
+			"path" : "bin/PiFrame"
 		}
 	],
 	"backtrace" : 1,
@@ -14,7 +14,7 @@
 		],
 		"files" : 
 		[
-			"src/picapture/CMakeLists.txt"
+			"src/piframe/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -45,7 +45,7 @@
 			]
 		}
 	],
-	"id" : "PiCapture::@a6370d552708cffd8887",
+	"id" : "PiFrame::@0efd94688106b1be4fea",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -61,12 +61,12 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "PiCapture",
-	"nameOnDisk" : "PiCapture",
+	"name" : "PiFrame",
+	"nameOnDisk" : "PiFrame",
 	"paths" : 
 	{
-		"build" : "src/picapture",
-		"source" : "src/picapture"
+		"build" : "src/piframe",
+		"source" : "src/piframe"
 	},
 	"sourceGroups" : 
 	[
@@ -83,7 +83,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/picapture/main.cpp",
+			"path" : "src/piframe/main.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],
