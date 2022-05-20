@@ -1,2 +1,3 @@
 add_subdirectory(piframe)
 add_subdirectory(capture)
+add_subdirectory(libcamera)

@@ -14,6 +14,9 @@
 # EXTERNAL cache entries
 ########################
 
+//Build using shared libraries
+BUILD_SHARED_LIBS:BOOL=ON
+
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=/usr/bin/arm-linux-gnueabihf-addr2line
 
@@ -229,11 +232,8 @@ CameraCapture_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug
 //Value Computed by CMake
 CameraCapture_SOURCE_DIR:STATIC=/home/pi/CameraCapture
 
-//Value Computed by CMake
-PiCapture_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug/src/picapture
-
-//Value Computed by CMake
-PiCapture_SOURCE_DIR:STATIC=/home/pi/CameraCapture/src/picapture
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
 
 //Value Computed by CMake
 PiFrame_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug/src/piframe
@@ -247,8 +247,11 @@ capture_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug/src/capture
 //Value Computed by CMake
 capture_SOURCE_DIR:STATIC=/home/pi/CameraCapture/src/capture
 
-//The directory containing a CMake configuration file for libcamera.
-libcamera_DIR:PATH=libcamera_DIR-NOTFOUND
+//Value Computed by CMake
+libcamera-apps_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug/src/libcamera
+
+//Value Computed by CMake
+libcamera-apps_SOURCE_DIR:STATIC=/home/pi/CameraCapture/src/libcamera
 
 
 ########################
@@ -353,7 +356,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=4
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=5
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -396,4 +399,33 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding PkgConfig
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.29.2()]
+LIBCAMERA_CFLAGS:INTERNAL=
+LIBCAMERA_CFLAGS_I:INTERNAL=
+LIBCAMERA_CFLAGS_OTHER:INTERNAL=
+LIBCAMERA_FOUND:INTERNAL=
+LIBCAMERA_INCLUDEDIR:INTERNAL=
+LIBCAMERA_LIBDIR:INTERNAL=
+LIBCAMERA_LIBS:INTERNAL=
+LIBCAMERA_LIBS_L:INTERNAL=
+LIBCAMERA_LIBS_OTHER:INTERNAL=
+LIBCAMERA_LIBS_PATHS:INTERNAL=
+LIBCAMERA_MODULE_NAME:INTERNAL=
+LIBCAMERA_PREFIX:INTERNAL=
+LIBCAMERA_STATIC_CFLAGS:INTERNAL=
+LIBCAMERA_STATIC_CFLAGS_I:INTERNAL=
+LIBCAMERA_STATIC_CFLAGS_OTHER:INTERNAL=
+LIBCAMERA_STATIC_LIBDIR:INTERNAL=
+LIBCAMERA_STATIC_LIBS:INTERNAL=
+LIBCAMERA_STATIC_LIBS_L:INTERNAL=
+LIBCAMERA_STATIC_LIBS_OTHER:INTERNAL=
+LIBCAMERA_STATIC_LIBS_PATHS:INTERNAL=
+LIBCAMERA_VERSION:INTERNAL=
+LIBCAMERA_libcamera_INCLUDEDIR:INTERNAL=
+LIBCAMERA_libcamera_LIBDIR:INTERNAL=
+LIBCAMERA_libcamera_PREFIX:INTERNAL=
+LIBCAMERA_libcamera_VERSION:INTERNAL=
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 
