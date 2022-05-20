@@ -142,6 +142,19 @@ PiFrame/fast:
 	$(MAKE) $(MAKESILENT) -f src/piframe/CMakeFiles/PiFrame.dir/build.make src/piframe/CMakeFiles/PiFrame.dir/build
 .PHONY : PiFrame/fast
 
+#=============================================================================
+# Target rules for targets named capture
+
+# Build rule for target.
+capture: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 capture
+.PHONY : capture
+
+# fast build rule for target.
+capture/fast:
+	$(MAKE) $(MAKESILENT) -f src/capture/CMakeFiles/capture.dir/build.make src/capture/CMakeFiles/capture.dir/build
+.PHONY : capture/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -151,6 +164,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... PiFrame"
+	@echo "... capture"
 .PHONY : help
 
 

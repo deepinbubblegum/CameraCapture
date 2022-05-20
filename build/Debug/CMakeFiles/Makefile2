@@ -91,18 +91,39 @@ clean: src/clean
 
 # Recursive "all" directory target.
 src/all: src/piframe/all
+src/all: src/capture/all
 
 .PHONY : src/all
 
 # Recursive "preinstall" directory target.
 src/preinstall: src/piframe/preinstall
+src/preinstall: src/capture/preinstall
 
 .PHONY : src/preinstall
 
 # Recursive "clean" directory target.
 src/clean: src/piframe/clean
+src/clean: src/capture/clean
 
 .PHONY : src/clean
+
+#=============================================================================
+# Directory level rules for directory src/capture
+
+# Recursive "all" directory target.
+src/capture/all: src/capture/CMakeFiles/capture.dir/all
+
+.PHONY : src/capture/all
+
+# Recursive "preinstall" directory target.
+src/capture/preinstall:
+
+.PHONY : src/capture/preinstall
+
+# Recursive "clean" directory target.
+src/capture/clean: src/capture/CMakeFiles/capture.dir/clean
+
+.PHONY : src/capture/clean
 
 #=============================================================================
 # Directory level rules for directory src/piframe
@@ -148,6 +169,33 @@ PiFrame: src/piframe/CMakeFiles/PiFrame.dir/rule
 src/piframe/CMakeFiles/PiFrame.dir/clean:
 	$(MAKE) $(MAKESILENT) -f src/piframe/CMakeFiles/PiFrame.dir/build.make src/piframe/CMakeFiles/PiFrame.dir/clean
 .PHONY : src/piframe/CMakeFiles/PiFrame.dir/clean
+
+#=============================================================================
+# Target rules for target src/capture/CMakeFiles/capture.dir
+
+# All Build rule for target.
+src/capture/CMakeFiles/capture.dir/all:
+	$(MAKE) $(MAKESILENT) -f src/capture/CMakeFiles/capture.dir/build.make src/capture/CMakeFiles/capture.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/capture/CMakeFiles/capture.dir/build.make src/capture/CMakeFiles/capture.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/pi/CameraCapture/build/Debug/CMakeFiles --progress-num=3,4 "Built target capture"
+.PHONY : src/capture/CMakeFiles/capture.dir/all
+
+# Build rule for subdir invocation for target.
+src/capture/CMakeFiles/capture.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/CameraCapture/build/Debug/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/capture/CMakeFiles/capture.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/CameraCapture/build/Debug/CMakeFiles 0
+.PHONY : src/capture/CMakeFiles/capture.dir/rule
+
+# Convenience name for target.
+capture: src/capture/CMakeFiles/capture.dir/rule
+
+.PHONY : capture
+
+# clean rule for target.
+src/capture/CMakeFiles/capture.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/capture/CMakeFiles/capture.dir/build.make src/capture/CMakeFiles/capture.dir/clean
+.PHONY : src/capture/CMakeFiles/capture.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

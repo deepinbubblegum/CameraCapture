@@ -12,6 +12,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.18.4/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.18.4/CMakeSystem.cmake"
   "../../src/CMakeLists.txt"
+  "../../src/capture/CMakeLists.txt"
   "../../src/piframe/CMakeLists.txt"
   "/usr/share/cmake-3.18/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.18/Modules/CMakeCXXInformation.cmake"
@@ -45,9 +46,11 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/piframe/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/capture/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "src/piframe/CMakeFiles/PiFrame.dir/DependInfo.cmake"
+  "src/capture/CMakeFiles/capture.dir/DependInfo.cmake"
   )

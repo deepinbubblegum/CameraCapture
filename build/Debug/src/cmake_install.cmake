@@ -45,6 +45,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/pi/CameraCapture/build/Debug/src/piframe/cmake_install.cmake")
+  include("/home/pi/CameraCapture/build/Debug/src/capture/cmake_install.cmake")
 
 endif()
 
