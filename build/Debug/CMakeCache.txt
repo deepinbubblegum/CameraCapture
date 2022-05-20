@@ -247,6 +247,9 @@ capture_BINARY_DIR:STATIC=/home/pi/CameraCapture/build/Debug/src/capture
 //Value Computed by CMake
 capture_SOURCE_DIR:STATIC=/home/pi/CameraCapture/src/capture
 
+//The directory containing a CMake configuration file for libcamera.
+libcamera_DIR:PATH=libcamera_DIR-NOTFOUND
+
 
 ########################
 # INTERNAL cache entries
