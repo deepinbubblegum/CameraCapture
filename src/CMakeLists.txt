@@ -1,2 +1,0 @@
-add_subdirectory(piframe)
-add_subdirectory(capture)
