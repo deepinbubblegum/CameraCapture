@@ -6,6 +6,7 @@ enable_testing()
 
 add_executable(CameraCapturePi main.cpp)
 
+set_target_properties(CameraCapturePi PROPERTIES LINK_FLAGS "-Wl,-rpath,./lib/")
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
