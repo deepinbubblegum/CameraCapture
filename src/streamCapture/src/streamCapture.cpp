@@ -20,17 +20,9 @@ string streamCapture::getDir_Video()
     return (string)buffer;
 }
 
-bool streamCapture::setParamsCapture(string url, double video_sec)
+bool streamCapture::setParamsCapture(int capture_width, int capture_height, int framerate)
 {
-    video_range = video_sec;
-    rtsp_uri = url;
-    video_cap = cap_RTSP();
-    return true;
-}
-
-bool streamCapture::setParamsCapture(int capture_width, int capture_height, int framerate, int display_width, int display_height)
-{
-    string pi_pipe = gstreamer_pipeline(capture_width, capture_height, framerate, display_width, display_height);
+    string pi_pipe = gstreamer_pipeline(capture_width, capture_height, framerate);
     width = capture_width;
     height = capture_height;
     fps = framerate;
@@ -38,45 +30,18 @@ bool streamCapture::setParamsCapture(int capture_width, int capture_height, int 
     return true;
 }
 
-bool streamCapture::setParamsCapture(int capture_width, int capture_height, int framerate)
-{
-    width = capture_width;
-    height = capture_height;
-    fps = framerate;
-    return true;
-}
-
-string streamCapture::gstreamer_pipeline(int capture_width, int capture_height, int framerate, int display_width, int display_height) {
+string streamCapture::gstreamer_pipeline(int capture_width, int capture_height, int framerate) {
     return
-            " libcamerasrc bitrate=5000000 ! video/x-raw,format=NV12,"
-            " width=(int)" + std::to_string(capture_width) + ","
-            " height=(int)" + std::to_string(capture_height) + ","
-            " framerate=(fraction)" + std::to_string(framerate) +"/1 !"
-            " v4l2convert !"
-            " appsink";
+        " libcamerasrc ! video/x-raw,format=YUY2,"
+        " width=(int)" + std::to_string(capture_width) + ","
+        " height=(int)" + std::to_string(capture_height) + ","
+        " framerate=(fraction)" + std::to_string(framerate) +"/1 !"
+        " decodebin ! videoconvert ! queue !"
+        " appsink";
 }
 
-cv::VideoCapture streamCapture::cap_RTSP()
-{
-    cv::VideoCapture cap(rtsp_uri, cv::CAP_GSTREAMER);
-    if (!cap.isOpened())
-    {
-        cout << "error capture is can`t open" << endl;
-        exit(0);
-    }
-    return cap;
-}
-
-
-
-cv::VideoCapture streamCapture::cap_pi(string pipe)
-{
-    cv::VideoCapture cap(pipe, cv::CAP_GSTREAMER);
-    if (!cap.isOpened())
-    {
-        cout << "error capture is can`t open" << endl;
-        exit(0);
-    }
+cv::VideoCapture streamCapture::cap_pi(string pi_pipe){
+    cv::VideoCapture cap(pi_pipe, cv::CAP_GSTREAMER);
     return cap;
 }
 
@@ -105,17 +70,16 @@ void streamCapture::capture()
 {
     this->isRunning_ = true;
     NAME_DIR = getDir_Video();
-    raspicam::RaspiCam_Cv Camera;
     cout << "campi init" << endl;
-    if(!Camera.open())
+    if(!video_cap.isOpened())
     {
         exit(0);
     }
 
     cout << "Capture is opened." << endl;
-    // width = video_cap.get(3);
-    // height = video_cap.get(4);
-    // fps = video_cap.get(5);
+    width = video_cap.get(3);
+    height = video_cap.get(4);
+    fps = video_cap.get(5);
     if (width == 0 && height == 0)
     {
         cout << "Capture can't capture frame." << endl;
@@ -132,14 +96,10 @@ void streamCapture::capture()
     while (true)
     {
         int64 start = cv::getTickCount();
-        // outputVideo.open(genFile_name(), fourcc, fps, size);
-        // video_cap >> frame;
-        Camera.grab();
-        Camera.retrieve (frame);
+        video_cap >> frame;
         frameSeq.push_back(frame);
         fps_now = cv::getTickFrequency() / (cv::getTickCount() - start);
         std::cout<< u8"\033[2J\033[1;1H"; // linux clear screen console
-        // std::cout << "FPS : " << fps << std::endl;
         cout << "FPS Min : " << fps_min << "FPS Max : " << fps_max << "FPS Curent now : " << fps_now << "FPS Avg : " << fps_avg << endl;
         fps_sum += fps_now;
         fps_avg = fps_sum / count_fps;
@@ -154,10 +114,10 @@ void streamCapture::capture()
         }
         count_fps++;
         // count_frame = 0;
-        if (!this->isRunning_)
-            break;
+        // if (!this->isRunning_)
+        //     break;
     }
-    Camera.release();
+    video_cap.release();
 }
 
 bool streamCapture::startRecord(){
@@ -171,19 +131,20 @@ void streamCapture::record_frame(){
     while (this->isRunning_)
     {
         if(!frameSeq.empty()){
-            outputVideo.open(genFile_name(), fourcc, 50, size);
+            outputVideo.open(genFile_name(), fourcc, fps, size);
             while (true)
             {
                 if(!frameSeq.empty()){
-                    // outputVideo << frameSeq.front();
+                    outputVideo << frameSeq.front();
                     frameSeq.pop_front();
                     count_frame++;
-                    // cout << "frame :" << count_frame << endl;
+                    cout << "frame :" << count_frame << endl;
                 }
-                if (count_frame >= (video_range * fps))
+                if (count_frame >= (video_range * fps)){
+                    count_frame = 0;
                     break;
+                }
             }
-            count_frame = 0;
             if (!this->isRunning_)
             {
                 outputVideo.release();
@@ -192,55 +153,3 @@ void streamCapture::record_frame(){
         }
     }
 }
-
-
-// bool streamCapture::start(string url, double video_sec){
-//     video_range = video_sec;
-//     rtsp_uri = url;
-//     capture();
-//     return true;
-// }
-
-// // test funtions
-// int streamCapture::test(){
-//     cv::VideoCapture cap(rtsp_uri, cv::CAP_GSTREAMER);
-//     if(!cap.isOpened()) {
-//         std::cout << "Cannot open RTSP stream" << std::endl;
-//         return -1;
-//     }
-//     width = cap.get(3);
-//     height = cap.get(4);
-//     fps = cap.get(5);
-//     if (width == 0 && height==0)
-//         return -1;
-
-//     cout << "Width : " << width << ", ";
-//     cout << "Height: " << height << ", ";
-//     cout << "fps: " << fps << endl;
-
-//     int w = (int)(width / resize_factor);
-//     int h = (int)(height / resize_factor);
-
-//     cv::namedWindow("RTSP stream front", cv::WINDOW_NORMAL);
-//     cv::resizeWindow("RTSP stream front", w, h);
-//     cv::namedWindow("RTSP stream back", cv::WINDOW_NORMAL);
-//     cv::resizeWindow("RTSP stream back", w, h);
-//     while (true)
-//     {
-//         cap >> frame;
-//         frameSeq.push_back(frame);
-//         cv::imshow("RTSP stream front", frameSeq.front());
-//         cv::imshow("RTSP stream back", frameSeq.back());
-//         if (cv::waitKey(1) == 27) {
-//             break;
-//         }
-//         if (cv::getWindowProperty("RTSP stream front", cv::WND_PROP_VISIBLE) < 1)
-//             break;
-//         if (cv::getWindowProperty("RTSP stream back", cv::WND_PROP_VISIBLE) < 1)
-//             break;
-//     }
-//     cap.release();
-//     cv::destroyAllWindows();
-//     cout << "RTSP stream CLOSED" << endl;
-//     return 0;
-// }

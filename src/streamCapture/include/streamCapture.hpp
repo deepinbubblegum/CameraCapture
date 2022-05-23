@@ -1,5 +1,4 @@
 #include <iostream>
-#include <raspicam/raspicam_cv.h>
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/utils/filesystem.hpp>
 #include <deque>
@@ -40,10 +39,9 @@ private:
     void capture();
     thread task_, task_record_;
     bool isRunning_;
+    cv::VideoCapture cap_pi(string pi_pipe);
 
-    string gstreamer_pipeline(int capture_width, int capture_height, int framerate, int display_width, int display_height);
-    cv::VideoCapture cap_RTSP();
-    cv::VideoCapture cap_pi(string pipe);
+    string gstreamer_pipeline(int capture_width, int capture_height, int framerate);
 
     bool startRecord();
     void record_frame();
@@ -52,11 +50,8 @@ public:
          this->setStopCapture();
     } 
     bool setParamsCapture(int capture_width, int capture_height, int framerate);
-    bool setParamsCapture(string url, double video_sec);
-    bool setParamsCapture(int capture_width, int capture_height, int framerate, int display_width, int display_height);
     // int test();
     bool setStopCapture();
     bool setStartCapture();
     vector<string> getPathFileVideo();
-    // bool start(string url, double range_sec);
 };
