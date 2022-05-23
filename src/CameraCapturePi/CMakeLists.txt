@@ -5,6 +5,7 @@ include(CTest)
 enable_testing()
 
 add_executable(CameraCapturePi main.cpp)
+target_link_libraries(CameraCapturePi LINK_PUBLIC camerapi)
 
 set_target_properties(CameraCapturePi PROPERTIES LINK_FLAGS "-Wl,-rpath,./lib/")
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

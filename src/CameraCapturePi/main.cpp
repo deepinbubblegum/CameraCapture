@@ -1,5 +1,13 @@
 #include <iostream>
+#include <camerapi.hpp>
 
 int main(int, char**) {
-    std::cout << "Hello, world!\n";
+    CameraPi camerapi;
+    int width = 1920;
+    int height = 1080;
+    int fps = 30;
+
+    camerapi.init(width, height, fps);
+    camerapi.readFrame();
+    return 0;
 }

@@ -1,2 +1,2 @@
-
 add_subdirectory(CameraCapturePi)
+add_subdirectory(camerapi)
