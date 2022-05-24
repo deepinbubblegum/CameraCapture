@@ -20,12 +20,22 @@ bool CameraPi::init(int w, int h, int fps){
 
 bool CameraPi::readFrame(){
     string cmd = cmdSetCamera();
+    cv::Size actual_size(1920, 1080);
+    cv::Size half_size(960, 540);
     cout << cmd << endl;
-    char buffer[nb];
+    char buf[nb];
     pipe = popen(cmd.c_str(), "r");
-    while (fgets(buffer, nb, pipe) != NULL)
+    int count = 0;
+    while (fgets(buf, nb, pipe) != NULL)
     {   
-        cout << buffer;
+        // cv::Mat imageWithData = cv::Mat(nb, 1, CV_8U, buf.data()).clone();
+        // cv::Mat YUV(actual_size, CV_8UC1, buf.data());
+        // cv::Mat YUV = cv::imdecode(buf, );
+        // cv::imshow("view", YUV);
+        
+        // bufferSeq.push_back(*buf);
+        // cout << bufferSeq.front();
+        // bufferSeq.pop_front();
     }
     pclose(pipe);
     return true;
