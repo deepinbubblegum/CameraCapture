@@ -15,7 +15,10 @@ N_frames = 0
 
 w2 = int(64*(w/64))
 h2 = int(32*(h/32))
-bytesPerFrame = int(w2*h2*3//2)
+bytesPerFrame = int(w2*h2*3/2)
+print("w2", w2)
+print("h2", h2)
+print(bytesPerFrame)
 fps = 50
 # print("Y shape: ", w2*h2)
 videoCmd = f'libcamera-vid -n --framerate {fps} --width {w} --height {h} -t 0 --codec yuv420 -o -'
@@ -27,7 +30,6 @@ atexit.register(cameraProcess.terminate)
 rawStream = cameraProcess.stdout.read(bytesPerFrame)
 
 print("Recording...")
-
 start_time = time.time()
 while True:
     cameraProcess.stdout.flush()
@@ -38,6 +40,7 @@ while True:
     # frame_rgb = cv2.cvtColor(yuv, cv2.COLOR_YUV2BGR_I420)
     # cv2.imshow('yuv', frame_rgb)
     # cv2.waitKey(1)
+    # print(yuv)
     frames.append(yuv)
     N_frames += 1
     if N_frames > max_frames: break
@@ -47,13 +50,13 @@ cameraProcess.terminate() # stop the camera
 elapsed_seconds = end_time-start_time
 print("Done! Result: "+str(N_frames/elapsed_seconds)+" fps")
 
-print("Writing frames to disk...")
-fourcc = cv2.VideoWriter_fourcc(*"MJPG")
-out = cv2.VideoWriter("video.avi", fourcc, 50, (w,h))
-for n in range(N_frames):
-    frame_rgb = cv2.cvtColor(frames[n], cv2.COLOR_YUV2BGR_I420)
-    out.write(frame_rgb)
-out.release()
+# print("Writing frames to disk...")
+# fourcc = cv2.VideoWriter_fourcc(*"MJPG")
+# out = cv2.VideoWriter("video.avi", fourcc, 50, (w,h))
+# for n in range(N_frames):
+#     frame_rgb = cv2.cvtColor(frames[n], cv2.COLOR_YUV2BGR_I420)
+#     out.write(frame_rgb)
+# out.release()
 
 print("Display frames with OpenCV...")
 for n in range(N_frames):
