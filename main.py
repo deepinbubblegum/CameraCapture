@@ -15,8 +15,7 @@ start_time = time.time()
 
 while True:
     if cap_.ret:
-        yuv420 = cap_.read()
-        frame_rgb = cv2.cvtColor(yuv420, cv2.COLOR_YUV2BGR_I420)
+        frame_rgb = cv2.cvtColor(cap_.read(), cv2.COLOR_YUV2BGR_I420)
         # print(frame_rgb.shape)
         N_frames += 1
     end_time = time.time()
