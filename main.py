@@ -1,5 +1,6 @@
 from PiRecord import Capture
 import time
+import cv2
 
 width=1920
 height=1080
@@ -14,7 +15,9 @@ start_time = time.time()
 
 while True:
     if cap_.ret:
-        cap_.read()
+        yuv420 = cap_.read()
+        frame_rgb = cv2.cvtColor(yuv420, cv2.COLOR_YUV2BGR_I420)
+        # print(frame_rgb.shape)
         N_frames += 1
     end_time = time.time()
     elapsed = end_time-start_time
