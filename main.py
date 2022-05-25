@@ -1,13 +1,17 @@
 from PiRecord import Capture
-import cv2
 import time
 
-cap_ = Capture(width=1920, height=1080, fps=50)
+width=1920
+height=1080
+fps=50
+video_range = 10 #sec
+
+cap_ = Capture(width, height, fps)
 cap_.start()
 N_frames = 0
-MAX_frames = 50 * 10
+MAX_frames = fps * video_range
 start_time = time.time()
-# cv2.cvtColor(cap_.read(), cv2.COLOR_YUV2BGR_I420)
+
 while True:
     if cap_.ret:
         cap_.read()

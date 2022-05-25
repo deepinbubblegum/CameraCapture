@@ -20,7 +20,7 @@ class Capture():
     def update(self):
         videoCmd = f'libcamera-vid -n --framerate {self.fps} --width {self.width} --height {self.height} -t 0 --codec yuv420 -o -'
         videoCmd = videoCmd.split()
-        cameraProcess = sp.Popen(videoCmd, stdout=sp.PIPE, bufsize=self.bytesPerFrame*2)
+        cameraProcess = sp.Popen(videoCmd, stdout=sp.PIPE, bufsize=self.bytesPerFrame)
         atexit.register(cameraProcess.terminate)
         while self.isRuning:
             yuv = np.frombuffer(cameraProcess.stdout.read(self.bytesPerFrame), dtype=np.uint8).reshape((self.height2*3//2, self.width2))
