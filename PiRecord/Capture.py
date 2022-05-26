@@ -1,4 +1,5 @@
-import cv2
+from time import sleep
+import time
 import numpy as np
 import subprocess as sp
 from threading import Thread
@@ -12,6 +13,7 @@ class Capture():
         self.width = width
         self.height = height
         self.fps = fps
+        self.video_range = 5 #sec
         self.width2 = int(64*(self.width/64))
         self.height2 = int(32*(self.height/32))
         self.bytesPerFrame = int(self.width2*self.height2*3/2)
@@ -29,7 +31,7 @@ class Capture():
                 break
             self.queue_frame.put(yuv)
             cameraProcess.stdout.flush()
-
+            
     def read(self):
         return self.queue_frame.get()
 
