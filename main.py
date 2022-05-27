@@ -1,24 +1,27 @@
-from PiRecord import Capture, Reacord
-import time
-width=1920
-height=1080
-video_range = 5 #sec
-fps=50
-cap_ = Capture(width, height, fps)
-rec_ = Reacord(fps, video_range)
-cap_.start()
-start_time = time.time()
-N_frames = 0
-MAX_frames = fps * video_range
+from time import sleep
+from PiRecord import Capture
+import socket
+import base64
+
+cap_ = Capture(width=1920, height=1080, fps=50)
+BUFF_SIZE = 65536
+# Create a UDP socket
+server_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+server_socket.setsockopt(socket.SOL_SOCKET,socket.SO_RCVBUF,BUFF_SIZE)
+host_name = socket.gethostname()
+host_ip = '192.168.2.41'
+print(host_ip)
+port = 9999
+socket_address = (host_ip,port)
+server_socket.bind(socket_address)
+print('Listening at:', socket_address)
 while True:
-    if cap_.ret:
-        # rec_.push(cap_.read())
-        cap_.read()
-        N_frames += 1
-        end_time = time.time()
-        elapsed = end_time-start_time
-        print("\033[2J\033[1;1H Result: "+str(N_frames/elapsed)+" fps")
-        if N_frames > MAX_frames:
-            N_frames = 0
-            start_time = time.time()
-        # frame_rgb = cv2.cvtColor(yuv420, cv2.COLOR_YUV2BGR_I420)
+    msg, client_addr = server_socket.recvfrom(BUFF_SIZE)
+    print('GOT connection from ', client_addr)
+    cap_.start()
+    while True:
+        if cap_.ret():
+            yuv420 = cap_.read()
+            message = base64.b64encode(yuv420)
+            server_socket.sendto(message, client_addr)
+server_socket.close()
