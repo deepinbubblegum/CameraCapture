@@ -12,4 +12,4 @@ while True:
         yuv420 = cap_.read()
         sleep(0.02)
     else:
-        sleep(2)
+        sleep(1)
