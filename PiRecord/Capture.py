@@ -20,7 +20,7 @@ class Capture():
     def update(self):
         videoCmd = f'libcamera-vid -n --framerate {self.fps} --width {self.width} --height {self.height} -t 0 --codec yuv420 -o -'
         videoCmd = videoCmd.split()
-        cameraProcess = sp.Popen(videoCmd, stdout=sp.PIPE, bufsize=2)
+        cameraProcess = sp.Popen(videoCmd, stdout=sp.PIPE, bufsize=1)
         atexit.register(cameraProcess.terminate)
         start_time = time.time()
         MAX_frames = self.fps * self.video_range
@@ -39,7 +39,7 @@ class Capture():
             if N_frames > MAX_frames:
                 N_frames = 0
                 start_time = time.time()
-            
+
     def read(self):
         return self.queue_frame.get()
 
