@@ -17,21 +17,22 @@ class Capture():
         self.bytesPerFrame = int(self.width2*self.height2*3/2)
         print(f'width={self.width}, height={self.height}, fps="{self.fps}, bytesPerFrame={self.bytesPerFrame}')
 
+        self.videoCmd = f'libcamera-vid -n --framerate {self.fps} --width {self.width} --height {self.height} -t 0 --codec yuv420 -o -'
+        self.videoCmd = self.videoCmd.split()
+        self.cameraProcess = sp.Popen(self.videoCmd, stdout=sp.PIPE, bufsize=1)
+        atexit.register(self.cameraProcess.terminate)
+
     def update(self):
-        videoCmd = f'libcamera-vid -n --framerate {self.fps} --width {self.width} --height {self.height} -t 0 --codec yuv420 -o -'
-        videoCmd = videoCmd.split()
-        cameraProcess = sp.Popen(videoCmd, stdout=sp.PIPE, bufsize=1)
-        atexit.register(cameraProcess.terminate)
         start_time = time.time()
         MAX_frames = self.fps * self.video_range
         N_frames = 0
         while self.isRuning:
-            yuv = np.frombuffer(cameraProcess.stdout.read(self.bytesPerFrame), dtype=np.uint8).reshape((self.height2*3//2, self.width2))
+            yuv = np.frombuffer(self.cameraProcess.stdout.read(self.bytesPerFrame), dtype=np.uint8).reshape((self.height2*3//2, self.width2))
             if yuv.size != self.bytesPerFrame:
                 print("Error: Camera stream closed unexpectedly")
                 break
             self.queue_frame.put(yuv)
-            cameraProcess.stdout.flush()
+            self.cameraProcess.stdout.flush()
             N_frames += 1
             end_time = time.time()
             elapsed = end_time-start_time
@@ -51,6 +52,10 @@ class Capture():
         thread_cap = Thread(target=self.update, args=())
         thread_cap.daemon = True
         thread_cap.start()
+
+        # thread_cap2 = Thread(target=self.update, args=())
+        # thread_cap2.daemon = True
+        # thread_cap2.start()
 
     def stop(self):
         self.isRuning = False
