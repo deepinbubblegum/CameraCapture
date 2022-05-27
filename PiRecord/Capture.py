@@ -53,9 +53,5 @@ class Capture():
         thread_cap.daemon = True
         thread_cap.start()
 
-        # thread_cap2 = Thread(target=self.update, args=())
-        # thread_cap2.daemon = True
-        # thread_cap2.start()
-
     def stop(self):
         self.isRuning = False

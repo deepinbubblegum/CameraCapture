@@ -10,6 +10,6 @@ cap_.start()
 while True:
     if cap_.ret():
         yuv420 = cap_.read()
-        sleep(0.02)
+        sleep(0.01)
     else:
         sleep(1)
