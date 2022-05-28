@@ -16,6 +16,6 @@ fps=50
 #     else:
 #         sleep(1)
 
-Multi proc shm
+# Multi proc shm
 cap_ = CaptureMultiproc(width, height, fps)
 cap_.start()
