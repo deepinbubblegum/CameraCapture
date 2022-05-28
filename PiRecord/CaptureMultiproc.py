@@ -16,7 +16,7 @@ class CaptureMultiproc():
 
         self.np_arr_shape = (height*3//2, width)
         self.mp_array = Array("I", int(np.prod(self.np_arr_shape)), lock=Lock())
-        self.np_array = np.frombuffer(self.mp_array.get_obj(), dtype="I")#.reshape(self.np_arr_shape)
+        self.np_array = np.frombuffer(self.mp_array.get_obj(), dtype="I").reshape(self.np_arr_shape)
         self.shared_memory = (self.mp_array, self.np_array)
 
     def recv_camera(self, np_arr_shape, shared_memory, width, height, fps, video_range):
@@ -31,7 +31,7 @@ class CaptureMultiproc():
         cameraProcess = sp.Popen(videoCmd, stdout=sp.PIPE, bufsize=1)
         atexit.register(cameraProcess.terminate)
         while True:
-            yuv = np.frombuffer(cameraProcess.stdout.read(bytesPerFrame), dtype=np.uint8) #.reshape((height*3//2, width))
+            yuv = np.frombuffer(cameraProcess.stdout.read(bytesPerFrame), dtype=np.uint8).reshape((height*3//2, width))
             if yuv.size != bytesPerFrame:
                 print("Error: Camera stream closed unexpectedly")
                 break
@@ -51,7 +51,7 @@ class CaptureMultiproc():
     def recver_frame(self, shared_memory):
         mp_array, np_array = shared_memory
         while True:
-            # _ = np_array
+            _ = np_array
             # print(np_array)
             while True:
                 try:
@@ -59,7 +59,7 @@ class CaptureMultiproc():
                     break
                 # it already unlocked, wait until its locked again which means a new frame is ready
                 except ValueError:
-                    time.sleep(0.001)
+                    time.sleep(0.002)
 
     def start(self):
         # creating new processes
