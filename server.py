@@ -1,4 +1,5 @@
 import socket
+from time import sleep
 from Record import RecordUDP
 
 # MAX_DGRAM = 2**16
@@ -10,3 +11,4 @@ from Record import RecordUDP
 #     print(addr)
 
 rec_udp = RecordUDP()
+rec_udp.start()
