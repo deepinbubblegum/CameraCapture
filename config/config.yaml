@@ -1,3 +1,6 @@
 target:
+  width: 1920
+  height: 1080
+  fps: 50
   ipaddress: "192.168.2.39"
-  prot: 9000
+  prot: 20001

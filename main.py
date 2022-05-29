@@ -2,9 +2,9 @@ from time import sleep
 from PiRecord import Capture, CaptureMultiproc, CaptureUDP
 from threading import Thread
 
-width=1920
-height=1080
-fps=50
+# width=640
+# height=480
+# fps=50
 
 # Multi Thread
 # cap_ = Capture(width, height, fps)
