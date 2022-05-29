@@ -20,6 +20,6 @@ fps=50
 # cap_ = CaptureMultiproc(width, height, fps)
 # cap_.start()
 
-# capture udp sender
+# capture udp
 cap_ = CaptureUDP()
 cap_.start()
