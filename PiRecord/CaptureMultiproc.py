@@ -27,6 +27,7 @@ class CaptureMultiproc():
         mp_array, np_array = shared_memory
 
         videoCmd = f'libcamera-vid -n --framerate {fps} --width {width} --height {height} -t 0 --codec yuv420 -o -'
+        print(videoCmd)
         videoCmd = videoCmd.split()
         cameraProcess = sp.Popen(videoCmd, stdout=sp.PIPE, bufsize=1)
         atexit.register(cameraProcess.terminate)

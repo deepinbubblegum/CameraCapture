@@ -18,6 +18,7 @@ class Capture():
         print(f'width={self.width}, height={self.height}, fps="{self.fps}, bytesPerFrame={self.bytesPerFrame}')
 
         self.videoCmd = f'libcamera-vid -n --framerate {self.fps} --width {self.width} --height {self.height} -t 0 --codec yuv420 -o -'
+        print(self.videoCmd)
         self.videoCmd = self.videoCmd.split()
         self.cameraProcess = sp.Popen(self.videoCmd, stdout=sp.PIPE, bufsize=1)
         atexit.register(self.cameraProcess.terminate)
