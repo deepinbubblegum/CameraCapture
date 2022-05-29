@@ -6,14 +6,14 @@ class CaptureUDP():
         # self.width = width
         # self.height = height
         # self.fps = fps
-        self.width, self.height, self.ipaddress, self.fps, self.prot = self.load_config()
+        self.width, self.height, self.fps, self.ipaddress, self.prot = self.load_config()
         print(self.ipaddress, self.prot)
         
     def load_config(self):
         with open('config/config.yaml', 'r') as fileconfig:
             conf = yaml.safe_load(fileconfig)
         width = conf['target']['width']
-        height = conf['target']['heights']
+        height = conf['target']['height']
         fps = conf['target']['fps']
         ip = conf['target']['ipaddress']
         port = conf['target']['prot']
