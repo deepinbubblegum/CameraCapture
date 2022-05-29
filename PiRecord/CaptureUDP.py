@@ -10,7 +10,7 @@ class CaptureUDP():
         print(self.ipaddress, self.prot)
         
     def load_config(self):
-        with open('config/config.yaml', 'r') as fileconfig:
+        with open('config/piconfig.yaml', 'r') as fileconfig:
             conf = yaml.safe_load(fileconfig)
         width = conf['target']['width']
         height = conf['target']['height']
