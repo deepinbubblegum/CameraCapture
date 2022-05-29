@@ -1,4 +1,5 @@
 import yaml
+import subprocess as sp
 
 class CaptureUDP():
     def __init__(self, width=1920, height=1080, fps=50):
@@ -13,5 +14,11 @@ class CaptureUDP():
             conf = yaml.safe_load(fileconfig)
         return conf['target']['ipaddress'], conf['target']['prot']
 
-    def camera_subprocess(self):
-        pass
+    def camera_subprocess(self, width, height, fps, ipaddress, prot):
+        videoCmd = f'libcamera-vid -n --framerate {fps} --width {width} --height {height} -t 0 --codec yuv420 --inline -o udp://{ipaddress}:{prot}'
+        print(videoCmd)
+        videoCmd = videoCmd.split()
+        sp.run(videoCmd)
+
+    def start(self):
+        self.camera_subprocess(self.width, self.height, self.fps, self.ipaddress, self.prot)

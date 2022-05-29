@@ -21,5 +21,5 @@ fps=50
 # cap_.start()
 
 # capture udp sender
-
 cap_ = CaptureUDP()
+cap_.start()
