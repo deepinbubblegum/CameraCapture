@@ -1,5 +1,5 @@
 from time import sleep
-from PiRecord import Capture, CaptureMultiproc
+from PiRecord import Capture, CaptureMultiproc, CaptureUDP
 from threading import Thread
 
 width=1920
@@ -17,5 +17,9 @@ fps=50
 #         sleep(1)
 
 # Multi proc shm
-cap_ = CaptureMultiproc(width, height, fps)
-cap_.start()
+# cap_ = CaptureMultiproc(width, height, fps)
+# cap_.start()
+
+# capture udp sender
+
+cap_ = CaptureUDP()
