@@ -20,6 +20,7 @@ class Capture():
         self.width2 = int(64*(self.width/64))
         self.height2 = int(32*(self.height/32))
         self.bytesPerFrame = int(self.width2*self.height2*3/2)
+        self.reshape_frame = (self.height2*3//2, self.width2)
         print(f'width={self.width}, height={self.height}, fps="{self.fps}, bytesPerFrame={self.bytesPerFrame}')
         # create cmd
         self.videoCmd = f'libcamera-vid -n --framerate {self.fps} --width {self.width} --height {self.height} -t 0 --codec yuv420 -o -'
@@ -42,10 +43,9 @@ class Capture():
         start_time = time.time()
         MAX_frames = self.fps * self.video_range
         N_frames = 0
-        reshape_frame = (self.height2*3//2, self.width2)
         while self.isRuning:
             self.cameraProcess.stdout.flush()
-            yuv = np.frombuffer(self.cameraProcess.stdout.read(self.bytesPerFrame), dtype=np.uint8).reshape(reshape_frame)
+            yuv = np.frombuffer(self.cameraProcess.stdout.read(self.bytesPerFrame), dtype=np.uint8).reshape(self.reshape_frame)
             if yuv.size != self.bytesPerFrame:
                 print("Error: Camera stream closed unexpectedly")
                 break
@@ -82,7 +82,7 @@ class Capture():
         thread_rec = Thread(target=self.record, args=())
 
         thread_cap.daemon = True
-        thread_rec.daemon = True
+        thread_rec.daemon = False
 
         thread_cap.start()
         thread_rec.start()
