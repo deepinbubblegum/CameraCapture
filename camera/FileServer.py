@@ -12,7 +12,6 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         
 class FileServer():
     def __init__(self) -> None:
-
         os.makedirs(DIRECTORY, exist_ok=True)
 
     def setserver(self):
