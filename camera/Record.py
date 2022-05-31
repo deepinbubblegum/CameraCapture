@@ -66,5 +66,3 @@ class Record():
         for thr in thrs:
             thr.daemon = True
             thr.start()
-        for thr in thrs:
-            thr.join()
