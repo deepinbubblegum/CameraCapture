@@ -4,7 +4,7 @@ import socketserver
 from threading import Thread
 
 PORT = 8000
-DIRECTORY = "resource/images"
+DIRECTORY = "resource"
 
 class Handler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
