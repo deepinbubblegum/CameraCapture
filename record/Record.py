@@ -31,7 +31,7 @@ class Record():
                 continue
             break
         # create dir
-        dir_name = f'video/{port}'
+        dir_name = f'resource/video/{port}'
         os.makedirs(dir_name, exist_ok=True)
         # get detial video
         width, height = int(cap.get(3)), int(cap.get(4))
