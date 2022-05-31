@@ -1,5 +1,6 @@
-from PiRecord import Capture
+from PiRecord import CaptureUDP
 
 if __name__ == "__main__":
-    cap_ = Capture()
+    # capture udp
+    cap_ = CaptureUDP()
     cap_.start()
