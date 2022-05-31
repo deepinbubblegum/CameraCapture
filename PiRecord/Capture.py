@@ -1,12 +1,14 @@
 import numpy as np
 import subprocess as sp
 from threading import Thread
-from queue import Queue
+# from queue import Queue
 from collections import deque
 import atexit
 import time
+import yaml
 class Capture():
-    def __init__(self, width=1920, height=1080, fps=50):
+    def __init__(self):
+        width, height, fps, ip, port = self.load_config()
         # self.queue_frame = Queue()
         self.queue_frame = deque()
         self.isRuning = False
@@ -24,6 +26,16 @@ class Capture():
         self.videoCmd = self.videoCmd.split()
         self.cameraProcess = sp.Popen(self.videoCmd, stdout=sp.PIPE, bufsize=1)
         atexit.register(self.cameraProcess.terminate)
+
+    def load_config(self):
+        with open('config/piconfig.yaml', 'r') as fileconfig:
+            conf = yaml.safe_load(fileconfig)
+        width = conf['target']['width']
+        height = conf['target']['height']
+        fps = conf['target']['fps']
+        ip = conf['target']['ipaddress']
+        port = conf['target']['prot']
+        return width, height, fps, ip, port
 
     def update(self):
         start_time = time.time()
@@ -68,13 +80,13 @@ class Capture():
         thread_rec = Thread(target=self.record, args=())
 
         thread_cap.daemon = True
-        thread_rec.daemon = False
+        thread_rec.daemon = True
 
         thread_cap.start()
         thread_rec.start()
 
-        # thread_cap.join()
-        # thread_rec.join()
+        thread_cap.join()
+        thread_rec.join()
 
     def stop(self):
         self.isRuning = False
