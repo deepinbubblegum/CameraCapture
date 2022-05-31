@@ -17,8 +17,8 @@ fps=30
 #         sleep(1)
 
 # Multi proc shm
-cap_ = CaptureMultiproc_shm_array(width, height, fps)
-cap_.start()
+# cap_ = CaptureMultiproc_shm_array(width, height, fps)
+# cap_.start()
 
 # capture udp
 # cap_ = CaptureUDP()
