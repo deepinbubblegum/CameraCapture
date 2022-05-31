@@ -1,32 +1,30 @@
-import time
-import yaml
+from multiprocessing import shared_memory, Process, Lock, Pipe, Array
+from multiprocessing import cpu_count, current_process
+import numpy as np
 import subprocess as sp
 import atexit
-import numpy as np
+import time
 
-class CaptureUDP():
+class CaptureMultiproc_shm_q():
     def __init__(self, width=1920, height=1080, fps=50):
-        # self.width = width
-        # self.height = height
-        # self.fps = fps
-        self.width, self.height, self.fps, self.ipaddress, self.prot = self.load_config()
-        print(self.ipaddress, self.prot)
-        
-    def load_config(self):
-        with open('config/piconfig.yaml', 'r') as fileconfig:
-            conf = yaml.safe_load(fileconfig)
-        width = conf['target']['width']
-        height = conf['target']['height']
-        fps = conf['target']['fps']
-        ip = conf['target']['ipaddress']
-        port = conf['target']['prot']
-        return width, height, fps, ip, port
+        self.width = width
+        self.height = height
+        self.fps = fps
+        self.video_range = 3
+        # creating a pipe
+        # self.parent_conn, self.child_conn = Pipe()
 
-    def camera_subprocess(self, width, height, fps, ipaddress, prot):
+        self.np_arr_shape = (height*3//2, width)
+        self.mp_array = Array("I", int(np.prod(self.np_arr_shape)), lock=Lock())
+        self.np_array = np.frombuffer(self.mp_array.get_obj(), dtype="I").reshape(self.np_arr_shape)
+        self.shared_memory = (self.mp_array, self.np_array)
+
+    def recv_camera(self, np_arr_shape, shared_memory, width, height, fps, video_range):
         start_time = time.time()
+        MAX_frames = fps * video_range
         N_frames = 0
-        MAX_frames = 50
         bytesPerFrame = int(width*height*3/2)
+        mp_array, np_array = shared_memory
 
         videoCmd = f'libcamera-vid -n --framerate {fps} --width {width} --height {height} -t 0 --codec yuv420 -o -'
         print(videoCmd)
@@ -40,7 +38,8 @@ class CaptureUDP():
                 break
             # sender
             # pipe.send(yuv) # pipe
-            
+            mp_array.acquire()
+            np_array[:] = yuv
             cameraProcess.stdout.flush()
             N_frames += 1
             end_time = time.time()
@@ -49,5 +48,29 @@ class CaptureUDP():
             if N_frames > MAX_frames:
                 N_frames = 0
                 start_time = time.time()
+    
+    def recver_frame(self, shared_memory):
+        mp_array, np_array = shared_memory
+        while True:
+            _ = np_array
+            print(np_array)
+            while True:
+                try:
+                    mp_array.release()
+                    break
+                # it already unlocked, wait until its locked again which means a new frame is ready
+                except ValueError:
+                    time.sleep(0.0005)
+
     def start(self):
-        
+        # creating new processes
+        p1 = Process(target=self.recv_camera, args=(self.np_arr_shape, self.shared_memory, self.width, self.height, self.fps, self.video_range, ))
+        p2 = Process(target=self.recver_frame, args=(self.shared_memory,))
+
+        # running processes
+        p1.start()
+        p2.start()
+
+        # wait until processes finish
+        p1.join()
+        p2.join()
