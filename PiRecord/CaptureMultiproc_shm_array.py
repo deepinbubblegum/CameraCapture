@@ -5,7 +5,7 @@ import subprocess as sp
 import atexit
 import time
 
-class CaptureMultiproc():
+class CaptureMultiproc_shm_array():
     def __init__(self, width=1920, height=1080, fps=50):
         self.width = width
         self.height = height

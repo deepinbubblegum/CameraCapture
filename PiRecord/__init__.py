@@ -1,4 +1,4 @@
 from PiRecord.Capture import Capture
 from PiRecord.Reacord import Reacord
-from PiRecord.CaptureMultiproc import CaptureMultiproc
+from PiRecord.CaptureMultiproc_shm_array import CaptureMultiproc_shm_array
 from PiRecord.CaptureUDP import CaptureUDP
