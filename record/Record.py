@@ -25,11 +25,13 @@ class Record():
     def capture(self, port):
         while True:
             cap = cv2.VideoCapture(f'udp://127.0.0.1:{port}', cv2.CAP_FFMPEG)
-            if not cap.isOpened():
+            if cap.isOpened():
+                break
+            else:
                 print(f'Capture not opened port : {port}')
                 print(f'Capture tay again.. : {port}')
-                continue
-            break
+                time.sleep(0.1)
+            
         # create dir
         dir_name = f'resource/video/{port}'
         os.makedirs(dir_name, exist_ok=True)
