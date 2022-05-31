@@ -18,7 +18,7 @@ class Capture():
         self.height2 = int(32*(self.height/32))
         self.bytesPerFrame = int(self.width2*self.height2*3/2)
         print(f'width={self.width}, height={self.height}, fps="{self.fps}, bytesPerFrame={self.bytesPerFrame}')
-
+        # create cmd
         self.videoCmd = f'libcamera-vid -n --framerate {self.fps} --width {self.width} --height {self.height} -t 0 --codec yuv420 -o -'
         print(self.videoCmd)
         self.videoCmd = self.videoCmd.split()
