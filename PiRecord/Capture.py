@@ -6,6 +6,7 @@ from collections import deque
 import atexit
 import time
 import yaml
+import cv2
 class Capture():
     def __init__(self):
         width, height, fps, ip, port = self.load_config()
@@ -62,7 +63,8 @@ class Capture():
         while True:
             if self.ret():
                 yuv420 = self.read()
-                print(yuv420)
+                # frame_rgb = cv2.cvtColor(self.read(), cv2.COLOR_YUV2BGR_I420)
+                # print(frame_rgb)
             else:
                 time.sleep(0.002)
 
