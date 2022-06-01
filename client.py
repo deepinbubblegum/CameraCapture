@@ -1,11 +1,14 @@
 from time import sleep
-from PiRecord import Capture, CaptureMultiproc_shm_array, CaptureUDP, CaptureMultiproc_shm_q
+from PiRecord import Capture, CaptureMultiproc_shm_array, CaptureUDP, CaptureMultiproc_shm_q, CaptureEmbed
 from threading import Thread
 
 # Multi Thread
-cap_ = Capture()
-cap_.start()
+# cap_ = Capture()
+# cap_.start()
 
+# Multi Thread
+cap_ = CaptureEmbed()
+cap_.start()
 
 # Multi proc shm
 # cap_ = CaptureMultiproc_shm_array(width, height, fps)

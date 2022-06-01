@@ -20,7 +20,7 @@ class CaptureUDP():
         return width, height, fps, ip, port
 
     def camera_subprocess(self, width, height, fps, ipaddress, prot):
-        videoCmd = f'libcamera-vid -n --framerate {fps} --width {width} --height {height} -t 0 --inline -o udp://{ipaddress}:{prot}'
+        videoCmd = f'libcamera-vid -n --framerate {fps} --mode 1332:990:10 --width {width} --height {height} -t 0 --inline -o - | ffmpeg -re -f h264 -i pipe:0 -vcodec copy -strict experimental -f '
         print(videoCmd)
         videoCmd = videoCmd.split()
         sp.run(videoCmd)
