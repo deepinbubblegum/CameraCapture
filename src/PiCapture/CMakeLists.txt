@@ -1,6 +1,4 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(PiCapture VERSION 0.1.0)
 add_executable(PiCapture main.cpp)
-target_link_libraries(PiCapture LINK_PUBLIC streamCapture)
-target_link_libraries(PiCapture LINK_PUBLIC extractVideo)
 set_target_properties(PiCapture PROPERTIES LINK_FLAGS "-Wl,-rpath,./lib/")
