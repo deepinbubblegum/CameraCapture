@@ -7,7 +7,7 @@ class CaptureUDP():
         # self.height = height
         # self.fps = fps
         self.width, self.height, self.fps, self.ipaddress, self.port = self.load_config()
-        print(self.ipaddress, self.prot)
+        print(self.ipaddress, self.port)
         
     def load_config(self):
         with open('config/piconfig.yaml', 'r') as fileconfig:
