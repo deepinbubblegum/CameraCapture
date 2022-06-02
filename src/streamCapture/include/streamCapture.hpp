@@ -1,8 +1,14 @@
+#include <iostream>
+
+using namespace std;
 class StreamCapture
 {
 private:
-    /* data */
+    int width = 1280;
+    int height = 720;
+    int framerate = 50;
+
+    
 public:
-    StreamCapture(/* args */);
-    ~StreamCapture();
+    bool StreamCapture::Start();
 };
