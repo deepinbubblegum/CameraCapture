@@ -9,6 +9,7 @@ import atexit
 import time
 import yaml
 import cv2
+import ffmpeg
 class Capture():
     def __init__(self):
         width, height, fps, ip, port, dir_name = self.load_config()
@@ -69,12 +70,12 @@ class Capture():
                 start_time = time.time()
 
     def record(self):
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         while True:
-            if self.ret():
-                frame_rgb = self.read()
-            else:
-                time.sleep(0.002)
+            while True:
+                if self.ret():
+                    yuv = self.read()
+                else:
+                    time.sleep(0.002)
 
     def read(self):
         # return self.queue_frame.get()
