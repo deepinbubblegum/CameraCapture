@@ -1,6 +1,6 @@
-from PiRecord import Capture
+from PiRecord import Capture, CaptureMode
 
 if __name__ == "__main__":
     # Multi Thread
-    cap_ = Capture()
+    cap_ = CaptureMode()
     cap_.start()
