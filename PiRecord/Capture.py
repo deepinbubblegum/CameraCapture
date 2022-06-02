@@ -1,3 +1,5 @@
+import os
+import socket
 import numpy as np
 import subprocess as sp
 from threading import Thread
@@ -16,6 +18,12 @@ class Capture():
         self.width = width
         self.height = height
         self.fps = fps
+        # dir
+        # dir_name = f'resource/video'
+        # os.makedirs(dir_name, exist_ok=True)
+        # writer fourcc
+        self.video_codec = cv2.VideoWriter_fourcc("D", "I", "V", "X")
+
         self.video_range = 1 #sec
         self.width2 = int(64*(self.width/64))
         self.height2 = int(32*(self.height/32))
@@ -50,7 +58,8 @@ class Capture():
                 print("Error: Camera stream closed unexpectedly")
                 break
             # self.queue_frame.put_nowait(yuv)
-            self.queue_frame.append(yuv)
+            frame_rgb = cv2.cvtColor(yuv, cv2.COLOR_YUV2BGR_I420)
+            self.queue_frame.append(frame_rgb)
             N_frames += 1
             end_time = time.time()
             elapsed = end_time-start_time
@@ -60,11 +69,10 @@ class Capture():
                 start_time = time.time()
 
     def record(self):
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         while True:
             if self.ret():
-                yuv420 = self.read()
-                frame_rgb = cv2.cvtColor(yuv420, cv2.COLOR_YUV2BGR_I420)
-                # print(frame_rgb)
+                frame_rgb = self.read()
             else:
                 time.sleep(0.002)
 
