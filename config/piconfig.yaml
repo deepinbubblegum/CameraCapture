@@ -3,4 +3,4 @@ target:
   height: 720
   fps: 50
   ipaddress: "10.1.10.132"
-  prot: 20001
+  port: 20001
