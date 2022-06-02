@@ -23,7 +23,7 @@ class Capture():
         self.reshape_frame = (self.height2*3//2, self.width2)
         print(f'width={self.width}, height={self.height}, fps="{self.fps}, bytesPerFrame={self.bytesPerFrame}')
         # create cmd
-        self.videoCmd = f'libcamera-vid -n --framerate {self.fps} --width {self.width} --height {self.height} -t 0 --codec yuv420 -o -'
+        self.videoCmd = f'libcamera-vid --mode 1332:990:10 --framerate {self.fps} --width {self.width} --height {self.height} -t 0 --codec yuv420 -o -'
         print(self.videoCmd)
         self.videoCmd = self.videoCmd.split()
         self.cameraProcess = sp.Popen(self.videoCmd, stdout=sp.PIPE, bufsize=1)
@@ -36,7 +36,7 @@ class Capture():
         height = conf['target']['height']
         fps = conf['target']['fps']
         ip = conf['target']['ipaddress']
-        port = conf['target']['prot']
+        port = conf['target']['port']
         return width, height, fps, ip, port
 
     def update(self):

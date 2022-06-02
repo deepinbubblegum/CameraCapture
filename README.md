@@ -7,5 +7,3 @@ ffplay udp://127.0.0.1:20001 -vf "setpts=N/50" -fflags nobuffer -flags low_delay
 
 # ffmpeg -re -i "%WMSAPP_HOME%/content/sample.mp4" -pix_fmt yuv420p -vsync 1 -threads 0 -vcodec libx264 -r 30 -g 60 -sc_threshold 0 -b:v 512k -bufsize 640k -maxrate 640k -preset veryfast -profile:v baseline -tune film -acodec aac -b:a 128k -ac 2 -ar 48000 -af "aresample=async=1:min_hard_comp=0.100000:first_pts=0" -bsf:v h264_mp4toannexb -f mpegts udp://127.0.0.1:10000?pkt_size=1316
 
-
-libcamera-vid -o - -t 0 -g 30 --width 640 --height 480 | ffmpeg -re -f h264 -i pipe:0 -vcodec copy -strict experimental -f rtp rtp://SERVER
