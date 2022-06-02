@@ -1,6 +1,9 @@
 import os
+from threading import Thread
 import yaml
 import subprocess as sp
+import ffmpeg
+
 class CaptureMode():
     def __init__(self):
         self.width, self.height, self.fps, self.ipaddress, self.port, self.dir_name = self.load_config()
@@ -24,4 +27,8 @@ class CaptureMode():
         sp.run(videoCmd)
 
     def start(self):
-        self.camera_subprocess(self.width, self.height, self.fps, self.ipaddress, self.port, self.dir_name)
+        # self.camera_subprocess(self.width, self.height, self.fps, self.ipaddress, self.port, self.dir_name)
+        thread_cap = Thread(target=self.camera_subprocess, args=(self.width, self.height, self.fps, self.ipaddress, self.port, self.dir_name))
+        thread_cap.daemon = True
+        thread_cap.start()
+        thread_cap.join()
