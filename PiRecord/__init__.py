@@ -6,3 +6,4 @@ from PiRecord.CaptureUDP import CaptureUDP
 from PiRecord.CaptureEmbed import CaptureEmbed
 from PiRecord.CaptureMode import CaptureMode
 from PiRecord.FileServer import FileServer
+from PiRecord.StreamImages import StreamImages
