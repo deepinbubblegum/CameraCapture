@@ -1,9 +1,9 @@
 import os
 import yaml
 import subprocess as sp
-class CaptrueMode():
+class CaptureMode():
     def __init__(self):
-        self.width, self.height, self.fps, self.ip, self.port, self.dir_name = self.load_config()
+        self.width, self.height, self.fps, self.ipaddress, self.port, self.dir_name = self.load_config()
         os.makedirs(self.dir_name, exist_ok=True)
         
     def load_config(self):
