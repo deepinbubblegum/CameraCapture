@@ -5,3 +5,4 @@ from PiRecord.CaptureMultiproc_shm_q import CaptureMultiproc_shm_q
 from PiRecord.CaptureUDP import CaptureUDP
 from PiRecord.CaptureEmbed import CaptureEmbed
 from PiRecord.CaptureMode import CaptureMode
+from PiRecord.FileServer import FileServer
