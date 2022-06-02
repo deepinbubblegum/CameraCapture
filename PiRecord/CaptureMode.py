@@ -21,7 +21,7 @@ class CaptureMode():
         return width, height, fps, ip, port, dir_name
 
     def camera_subprocess(self, width, height, fps, ipaddress, port, dir_name):
-        videoCmd = f'libcamera-vid -t 0 --framerate {fps} --width {width} --height {height} --codec mjpeg --segment 1 -o {dir_name}/%010d.jpeg'
+        videoCmd = f'libcamera-vid -t 0 --framerate {fps} --width {width} --height {height} --codec mjpeg --segment 1 -o {dir_name}/frame_%010d.jpeg'
         print(videoCmd)
         videoCmd = videoCmd.split()
         sp.run(videoCmd)
