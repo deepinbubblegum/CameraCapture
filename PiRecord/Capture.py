@@ -41,7 +41,7 @@ class Capture():
 
     def update(self):
         start_time = time.time()
-        MAX_frames = self.fps * self.video_range
+        MAX_frames = self.fps
         N_frames = 0
         while self.isRuning:
             self.cameraProcess.stdout.flush()
@@ -54,7 +54,7 @@ class Capture():
             N_frames += 1
             end_time = time.time()
             elapsed = end_time-start_time
-            print("\033[2J\033[1;1H Result: "+str(N_frames/elapsed)+" fps")
+            print("\033[2J\033[1;1H Result: "+str(N_frames//elapsed)+" fps")
             if N_frames > MAX_frames:
                 N_frames = 0
                 start_time = time.time()
@@ -63,7 +63,7 @@ class Capture():
         while True:
             if self.ret():
                 yuv420 = self.read()
-                # frame_rgb = cv2.cvtColor(self.read(), cv2.COLOR_YUV2BGR_I420)
+                frame_rgb = cv2.cvtColor(yuv420, cv2.COLOR_YUV2BGR_I420)
                 # print(frame_rgb)
             else:
                 time.sleep(0.002)
