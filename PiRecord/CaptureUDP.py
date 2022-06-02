@@ -6,7 +6,7 @@ class CaptureUDP():
         # self.width = width
         # self.height = height
         # self.fps = fps
-        self.width, self.height, self.fps, self.ipaddress, self.prot = self.load_config()
+        self.width, self.height, self.fps, self.ipaddress, self.port = self.load_config()
         print(self.ipaddress, self.prot)
         
     def load_config(self):
@@ -20,7 +20,7 @@ class CaptureUDP():
         return width, height, fps, ip, port
 
     def camera_subprocess(self, width, height, fps, ipaddress, port):
-        videoCmd = f'libcamera-vid -n --framerate {fps} --mode 1332:990:10 --width {width} --height {height} -t 0 --inline -o udp://{ipaddress}:{port}'
+        videoCmd = f'libcamera-vid --framerate {fps} --mode 1332:990:10 --width {width} --height {height} -t 0 --inline -o udp://{ipaddress}:{port}'
         print(videoCmd)
         videoCmd = videoCmd.split()
         sp.run(videoCmd)
