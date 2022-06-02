@@ -11,7 +11,7 @@ import yaml
 import cv2
 class Capture():
     def __init__(self):
-        width, height, fps, ip, port = self.load_config()
+        width, height, fps, ip, port, dir_name = self.load_config()
         # self.queue_frame = Queue()
         self.queue_frame = deque()
         self.isRuning = False
@@ -19,8 +19,7 @@ class Capture():
         self.height = height
         self.fps = fps
         # dir
-        # dir_name = f'resource/video'
-        # os.makedirs(dir_name, exist_ok=True)
+        os.makedirs(dir_name, exist_ok=True)
         # writer fourcc
         self.video_codec = cv2.VideoWriter_fourcc("D", "I", "V", "X")
 
@@ -45,7 +44,8 @@ class Capture():
         fps = conf['target']['fps']
         ip = conf['target']['ipaddress']
         port = conf['target']['port']
-        return width, height, fps, ip, port
+        dir_name = conf['path']['dir']
+        return width, height, fps, ip, port, dir_name
 
     def update(self):
         start_time = time.time()
@@ -56,7 +56,7 @@ class Capture():
             yuv = np.frombuffer(self.cameraProcess.stdout.read(self.bytesPerFrame), dtype=np.uint8).reshape(self.reshape_frame)
             if yuv.size != self.bytesPerFrame:
                 print("Error: Camera stream closed unexpectedly")
-                break
+                continue
             # self.queue_frame.put_nowait(yuv)
             frame_rgb = cv2.cvtColor(yuv, cv2.COLOR_YUV2BGR_I420)
             self.queue_frame.append(frame_rgb)
