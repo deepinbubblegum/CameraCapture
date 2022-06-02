@@ -27,8 +27,7 @@ class CaptureMode():
         sp.run(videoCmd)
 
     def start(self):
-        # self.camera_subprocess(self.width, self.height, self.fps, self.ipaddress, self.port, self.dir_name)
         thread_cap = Thread(target=self.camera_subprocess, args=(self.width, self.height, self.fps, self.ipaddress, self.port, self.dir_name))
         thread_cap.daemon = True
         thread_cap.start()
-        thread_cap.join()
+        # thread_cap.join()
