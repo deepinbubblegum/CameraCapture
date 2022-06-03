@@ -1,9 +1,9 @@
 target:
   width: 1920
   height: 1080
-  fps: 45
+  fps: 50
   ipaddress: "192.168.2.222"
   port: 20001
   time: 0
 path:
-  dir: "resource/images"
+  dir: "resource"

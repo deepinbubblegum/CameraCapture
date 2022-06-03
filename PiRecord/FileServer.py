@@ -38,3 +38,4 @@ class FileServer():
         thr_server = Thread(target=self.setserver, args=())
         thr_server.daemon = True
         thr_server.start()
+        # thr_server.join()
