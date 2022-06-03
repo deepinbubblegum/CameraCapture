@@ -1,5 +1,6 @@
 import http.server
 import os
+import shutil
 import socketserver
 from threading import Thread
 import yaml
@@ -18,6 +19,7 @@ def load_config():
 
 PORT = 8000
 DIRECTORY = load_config()
+os.makedirs(DIRECTORY, exist_ok=True)
 
 class Handler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
@@ -36,4 +38,4 @@ class FileServer():
         thr_server = Thread(target=self.setserver, args=())
         thr_server.daemon = True
         thr_server.start()
-        thr_server.join()
+        # thr_server.join()

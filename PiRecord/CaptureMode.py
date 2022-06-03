@@ -8,10 +8,6 @@ class CaptureMode():
     def __init__(self):
         self.width, self.height, self.fps, self.ipaddress, self.port, self.dir_name, self.time = self.load_config()
         self.segment = int(1/self.fps * pow(10, 2))
-        try:
-            shutil.rmtree(self.dir_name)
-        except:
-            pass
         os.makedirs(self.dir_name, exist_ok=True)
         
     def load_config(self):
@@ -27,7 +23,7 @@ class CaptureMode():
         return width, height, fps, ip, port, dir_name, time
 
     def camera_subprocess(self, width, height, fps, ipaddress, port, dir_name, segment, time):
-        videoCmd = f'libcamera-vid -t {time} --framerate {fps} --width {width} --height {height} --codec mjpeg --segment {segment} -o {dir_name}/image%010d.jpg'
+        videoCmd = f'libcamera-vid -n -t {time} --framerate {fps} --width {width} --height {height} --codec mjpeg --segment 1000 -o {dir_name}/image%010d.mjpeg'
         print(videoCmd)
         videoCmd = videoCmd.split()
         sp.run(videoCmd)
@@ -36,4 +32,4 @@ class CaptureMode():
         thread_cap = Thread(target=self.camera_subprocess, args=(self.width, self.height, self.fps, self.ipaddress, self.port, self.dir_name, self.segment, self.time))
         thread_cap.daemon = True
         thread_cap.start()
-        # thread_cap.join()
+        thread_cap.join()
