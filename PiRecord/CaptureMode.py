@@ -8,6 +8,7 @@ class CaptureMode():
     def __init__(self):
         self.width, self.height, self.fps, self.ipaddress, self.port, self.dir_name, self.time = self.load_config()
         self.segment = int(1/self.fps * pow(10, 2))
+        self.project_name = None
         
     def load_config(self):
         with open('config/piconfig.yaml', 'r') as fileconfig:
@@ -28,7 +29,11 @@ class CaptureMode():
         # sp.run(videoCmd)
         self.pro = subprocess.Popen(videoCmd) 
 
+    def setProject(self, project_name):
+        self.project_name = project_name
+
     def start(self):
+        self.dir_name = f'{self.dir_name}/{self.project_name}'
         os.makedirs(self.dir_name, exist_ok=True)
         thread_cap = Thread(target=self.camera_subprocess, args=(self.width, self.height, self.fps, self.ipaddress, self.port, self.dir_name, self.segment, self.time))
         thread_cap.daemon = True
