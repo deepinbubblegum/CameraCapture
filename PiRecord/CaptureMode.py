@@ -33,9 +33,8 @@ class CaptureMode():
         self.project_name = project_name
 
     def start(self):
-        self.dir_name = f'{self.dir_name}/{self.project_name}'
-        os.makedirs(self.dir_name, exist_ok=True)
-        thread_cap = Thread(target=self.camera_subprocess, args=(self.width, self.height, self.fps, self.ipaddress, self.port, self.dir_name, self.segment, self.time))
+        os.makedirs(f'{self.dir_name}/{self.project_name}', exist_ok=True)
+        thread_cap = Thread(target=self.camera_subprocess, args=(self.width, self.height, self.fps, self.ipaddress, self.port, f'{self.dir_name}/{self.project_name}', self.segment, self.time))
         thread_cap.daemon = True
         thread_cap.start()
 
