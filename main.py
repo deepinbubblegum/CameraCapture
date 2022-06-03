@@ -31,6 +31,8 @@ def main():
                 isSetDir = False
             elif set[1] == 'stop' and isStart is False:
                 print('Process not start.')
+                isStart = False
+                isSetDir = False
                 send(f'Process not start.', addr)
             else:
                 isSetDir = True

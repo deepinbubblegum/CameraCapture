@@ -3,6 +3,7 @@ import os
 import shutil
 import socketserver
 from threading import Thread
+from time import sleep
 import yaml
 
 
@@ -30,10 +31,14 @@ class FileServer():
         os.makedirs(DIRECTORY, exist_ok=True)
 
     def setserver(self):
-        with socketserver.TCPServer(("", PORT), Handler) as httpd:
-            print("serving at port", PORT)
-            httpd.serve_forever()
-
+        while True:
+            try:
+                with socketserver.TCPServer(("", PORT), Handler) as httpd:
+                    print("serving at port", PORT)
+                    httpd.serve_forever()
+            except:
+                sleep(10)
+                print('try again start fileserver.')
     def start(self):
         thr_server = Thread(target=self.setserver, args=())
         thr_server.daemon = True
