@@ -2,7 +2,6 @@ import os
 from threading import Thread
 import yaml
 import subprocess as sp
-import ffmpeg
 import shutil
 
 class CaptureMode():
@@ -28,7 +27,7 @@ class CaptureMode():
         return width, height, fps, ip, port, dir_name, time
 
     def camera_subprocess(self, width, height, fps, ipaddress, port, dir_name, segment, time):
-        videoCmd = f'libcamera-vid -t {time} --framerate {fps} --width {width} --height {height} --codec mjpeg --segment {segment} -o {dir_name}/frame_%010d.jpg'
+        videoCmd = f'libcamera-vid -t {time} --framerate {fps} --width {width} --height {height} --codec mjpeg --segment {segment} -o {dir_name}/image%010d.jpg'
         print(videoCmd)
         videoCmd = videoCmd.split()
         sp.run(videoCmd)
