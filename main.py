@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+from time import sleep
 from PiRecord import CaptureMode, FileServer, StreamImages
 
 def main():
@@ -6,9 +7,8 @@ def main():
     serv_.start()
     cap_ = CaptureMode()
     cap_.start()
-    # stmi_ = StreamImages()
-    # stmi_.start()
-
+    sleep(20)
+    cap_.stop()
 
 if __name__ == '__main__':
     main()

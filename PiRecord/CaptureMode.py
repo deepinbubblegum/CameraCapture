@@ -1,8 +1,8 @@
 import os
 from threading import Thread
 import yaml
-import subprocess as sp
-import shutil
+import subprocess
+import signal
 
 class CaptureMode():
     def __init__(self):
@@ -26,10 +26,13 @@ class CaptureMode():
         videoCmd = f'libcamera-vid -n -t {time} --framerate {fps} --width {width} --height {height} --codec mjpeg --segment 1000 -o {dir_name}/image%010d.mjpeg'
         print(videoCmd)
         videoCmd = videoCmd.split()
-        sp.run(videoCmd)
+        # sp.run(videoCmd)
+        self.pro = subprocess.Popen(videoCmd) 
 
     def start(self):
         thread_cap = Thread(target=self.camera_subprocess, args=(self.width, self.height, self.fps, self.ipaddress, self.port, self.dir_name, self.segment, self.time))
         thread_cap.daemon = True
         thread_cap.start()
-        thread_cap.join()
+
+    def stop(self):
+        self.pro.kill()
